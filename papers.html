@@ -3,12 +3,23 @@ layout: page
 title: Academic Publications
 ---
 
+<div class="year-buttons">
+{% for year in site.data.papers reversed %}
+ {% assign yr = year[0] %}
+ <a href="" class="year-button">{{ yr }}</a>
+{% endfor %}
+</div>
+
 <div class="resume-item">
-	<ul class="resume-item-list papers-list">
-	{% for paper in site.data.papers %}
+	{% for year in site.data.papers %}
+	{% assign yr = year[0] %}
+	<h3>{{ yr }}</h2>
+	<ul class="papers-list">
+	  {% for paper in site.data.papers[yr] %}
 	  <li class="paper-item">
 	    {{ paper.item }}
 	  </li><br>
 	{% endfor %}
 	</ul>
+	{% endfor %}
 </div>

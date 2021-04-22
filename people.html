@@ -28,11 +28,13 @@ title: People
 	<ul class="person-item-list">
 	{% for person in site.data.people.affiliated %}
 	  <li class="person-item">
+	  	<span class="person-item-name">
 	    {% if person.url and person.url != "" %}
 	    	<a href="{{ person.url }}">{{ person.name }}</a>
 	    {% else %}
 	    	{{ person.name }}
 	    {% endif %}
+		</span>
 	    <img src="{{ person.image_path }}" class="person-item-img"/>
 	  </li><br>
 	{% endfor %}
@@ -44,11 +46,14 @@ title: People
 	<ul class="person-item-list">
 	{% for person in site.data.people.alumni %}
 	  <li class="person-item">
+	  	<span class="person-item-name">
 	    {% if person.url and person.url != "" %}
 	    	<a href="{{ person.url }}">{{ person.name }}</a>
 	    {% else %}
 	    	{{ person.name }}
 	    {% endif %}
+	    {{ person.affiliation }}
+	    </span>
 	  </li><br>
 	{% endfor %}
 	</ul>
