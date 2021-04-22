@@ -1,3 +1,16 @@
 ---
-layout: resume
+layout: page
 ---
+
+<img src="static/images/ChaseLabLogo.jpg" class="img-logo" style="width: 50%;"/>
+
+<div class="resume-item">
+	<h3>News</h3>
+	<ul class="news-items">
+	{% for item in site.data.news %}
+	  <li class="news-item">
+	    {{ item.date }} - {{ item.comment }}
+	  </li><br>
+	{% endfor %}
+	</ul>
+</div>

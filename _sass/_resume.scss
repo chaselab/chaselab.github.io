@@ -4,7 +4,6 @@
 // util
 
 .section-header {
-  @include section_border;
   margin-bottom: 1.5rem;
 
   h2 {
@@ -68,6 +67,7 @@
   }
 
   .executive-summary {
+    text-align: center;
     @include media_larger_than_mobile { font-size: 1.125rem; }
   }
 }
@@ -151,6 +151,7 @@
 // resume content styles
 
 .content-section {
+  clear: both;
   margin: 0 0 3rem;
 
   .resume-item { margin-bottom: 2rem; }
