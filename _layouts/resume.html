@@ -32,34 +32,6 @@
 
         {% include menu-list.html %}
       </header>
-      
-      {% if site.resume_section_software %}
-      <section class="content-section">
-        <header class="section-header">
-          <h2>Software</h2>
-        </header>
-        <div class="resume-item">
-          <ul class="resume-item-list">
-            {% for item in site.data.software %}
-            <li>
-              <a href="{{ item.url }}"><b>{{ item.name }}</b></a>: {{ item.description }}
-            </li><br>
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      {% endif %}
-      
-      {% if site.resume_section_papers %}
-      <section class="content-section">
-        <header class="section-header">
-          <h2>Academic Publications</h2>
-        </header>
-        <div class="resume-item">
-          {% include papers-list.html %}
-        </div>
-      </section>
-      {% endif %}
 
     </div>
 

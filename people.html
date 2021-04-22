@@ -1,0 +1,37 @@
+---
+layout: page
+title: People
+---
+
+<h3>Students</h3>
+<div class="resume-item">
+	<ul class="resume-item-list papers-list">
+	{% for person in site.data.people.students %}
+	  <li class="paper-item">
+	    {{ person.name }}
+	  </li><br>
+	{% endfor %}
+	</ul>
+</div>
+
+<h3>Affiliated</h3>
+<div class="resume-item">
+	<ul class="resume-item-list papers-list">
+	{% for person in site.data.people.affiliated %}
+	  <li class="paper-item">
+	    {{ person.name }}
+	  </li><br>
+	{% endfor %}
+	</ul>
+</div>
+
+<h3>Alumni</h3>
+<div class="resume-item">
+	<ul class="resume-item-list papers-list">
+	{% for person in site.data.people.alumni %}
+	  <li class="paper-item">
+	    {{ person.name }}
+	  </li><br>
+	{% endfor %}
+	</ul>
+</div>
