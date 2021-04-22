@@ -3,34 +3,52 @@ layout: page
 title: People
 ---
 
-<h3>Students</h3>
+<h2>Students</h2>
 <div class="resume-item">
-	<ul class="resume-item-list papers-list">
+	<ul class="person-item-list">
 	{% for person in site.data.people.students %}
-	  <li class="paper-item">
-	    {{ person.name }}
+	  <li class="person-item">
+	  	<span class="person-item-name">
+		    {% if person.url and person.url != "" %}
+		    	<a href="{{ person.url }}">{{ person.name }}</a>
+		    {% else %}
+		    	{{ person.name }}
+		    {% endif %}
+		    ({{ person.type }})
+		</span>
+	    <img src="{{ person.image_path }}" class="person-item-img"/>
+	    <span class="person-item-interests">Research interests: {{ person.interests }}</span>
 	  </li><br>
 	{% endfor %}
 	</ul>
 </div>
 
-<h3>Affiliated</h3>
+<h2>Affiliates</h2>
 <div class="resume-item">
-	<ul class="resume-item-list papers-list">
+	<ul class="person-item-list">
 	{% for person in site.data.people.affiliated %}
-	  <li class="paper-item">
-	    {{ person.name }}
+	  <li class="person-item">
+	    {% if person.url and person.url != "" %}
+	    	<a href="{{ person.url }}">{{ person.name }}</a>
+	    {% else %}
+	    	{{ person.name }}
+	    {% endif %}
+	    <img src="{{ person.image_path }}" class="person-item-img"/>
 	  </li><br>
 	{% endfor %}
 	</ul>
 </div>
 
-<h3>Alumni</h3>
+<h2>Alumni</h2>
 <div class="resume-item">
-	<ul class="resume-item-list papers-list">
+	<ul class="person-item-list">
 	{% for person in site.data.people.alumni %}
-	  <li class="paper-item">
-	    {{ person.name }}
+	  <li class="person-item">
+	    {% if person.url and person.url != "" %}
+	    	<a href="{{ person.url }}">{{ person.name }}</a>
+	    {% else %}
+	    	{{ person.name }}
+	    {% endif %}
 	  </li><br>
 	{% endfor %}
 	</ul>

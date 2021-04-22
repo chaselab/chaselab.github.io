@@ -1,0 +1,13 @@
+---
+layout: page
+title: Courses
+---
+
+<div class="resume-item">
+	{% for item in site.data.courses %}
+	  <div class="course-item">
+	    <h3>{{ item.name }} ({{ item.units }})</h3>
+	    {{ item.description }}
+	  </div><br/>
+	{% endfor %}
+</div>

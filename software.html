@@ -1,0 +1,20 @@
+---
+layout: page
+title: Software
+---
+
+<div class="resume-item">
+	<ul class="resume-item-list papers-list">
+	{% for item in site.data.software %}
+	  <div class="software-item">
+	    <h3>{{ item.name }}</h3>
+	    <span class="software-item-links">
+	    	<a href="{{ item.paper_link }}">Paper</a>
+	    	<a href="{{ item.code_link }}">Code</a>
+		</span><br/>
+	    <span class="software-item-description">{{ item.description }}</span>
+	    <img src="{{ item.image_path }}"/>
+	  </div><br/>
+	{% endfor %}
+	</ul>
+</div>

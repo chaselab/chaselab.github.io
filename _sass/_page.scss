@@ -1,0 +1,27 @@
+
+.img-description {
+	font-size: small;
+}
+
+.person-item-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.person-item-name {
+	font-weight: bold;
+}
+
+.person-item > img {
+	width: 150px;
+    max-width: 100%;
+    overflow: hidden;
+    @include border-radius(10px);
+    //margin: 0 auto;
+    display: block;
+}
+
+.person-item-interests {
+	font-size: small;
+}

@@ -1,0 +1,28 @@
+---
+layout: page
+title: Research
+---
+
+<div class="research-image">
+<img src="http://www.cnbc.cmu.edu/~schase/images/scientists_peering_into_brain.jpg" style="width: 50%;"/><span class="img-description">Credit: Sonya Todorova</span>
+</div>
+
+<div class="resume-item">
+	{% for item in site.data.research %}
+	  <div class="research-item">
+	    <h3>{{ item.name }}</h3>
+	    {{ item.description }}
+	  </div><br>
+	{% endfor %}
+</div>
+
+<h3>Sponsors</h3>
+<div class="resume-item">
+	<ul class="sponsors-item-list">
+	{% for item in site.data.sponsors %}
+	  <li class="sponsor-item">
+	    {{ item.name }}
+	  </li>
+	{% endfor %}
+	</ul>
+</div>
