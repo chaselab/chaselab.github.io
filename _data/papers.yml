@@ -1,0 +1,123 @@
+-
+  item: 'Zhou X, Tien R, Ravikumar S, Chase SM,<br><i><b>Distinct types of neural reorganization during long-term learning</b></i>,<br>J Neurophysiol in press (2019)<br><a href="https://www.physiology.org/doi/abs/10.1152/jn.00466.2018" class="red_over">JNP link</a>'
+  year: 2019
+-
+  item: 'Jeon BB, Swain AD, Good JT, Chase SM, Kuhlman SJ,<br><i><b>Feature selectivity is stable in primary visual cortex across a range of spatial frequencies</b></i>,<br>Sci Rep 8:15288 (2018)<br><a href="https://www.nature.com/articles/s41598-018-33633-2" class="red_over">Sci Rep link</a>'
+  year: 2018
+-
+  item: 'Hennig JA, Golub MD, Lund PJ, Sadtler PT, Oby ER, Quick KM, Ryu SI, Tyler-Kabara EC, *Batista AP, *Yu BM, *Chase SM (* joint authorship),<br><i><b>Constraints on neural redundancy</b></i>,<br>eLife 7:e36774 (2018)<br><a href="https://elifesciences.org/articles/36774" class="red_over">eLife link</a>'
+  year: 2018
+-
+  item: 'Golub MD, Sadtler PT, Oby ER, Quick KM, Ryu SI, Tyler-Kabara EC, Batista AP, *Chase SM, and *Yu BM (* joint authorship),<br><i><b>Learning by neural reassociation</b></i>,<br>Nature Neurosci.  21:607-616 (2018)<br><a href="https://www.nature.com/articles/s41593-018-0095-3" class="red_over">Nature Neuroscience link</a>'
+  year: 2018
+-
+  item: 'Zhang Y and Chase SM,<br><i><b>Optimizing the usability of brain computer interfaces</b></i>,<br>Neural Comp 22:1-36 (2018)<br><a href="https://www.ncbi.nlm.nih.gov/pubmed/29566348" class="red_over">PubMed link</a>'
+  year: 2018
+-
+  item: 'Downey J, Schwed N, Chase SM, Schwartz AB, and Collinger J,<br><i><b>Intracortical recording stability in human brain-computer interface users</b></i>,<br>J Neural Eng 10.1088/1741-2552/aab7a0 (2018)<br><a href="https://www.ncbi.nlm.nih.gov/pubmed/29553484" class="red_over">PubMed link</a>'
+  year: 2018
+-
+  item: 'Bittner SR, Williamson RC, Snyder AC, Litwin-Kumar A, Doiron B, *Chase SM, *Smith MA, and *Yu BM (* joint authorship),<br><i><b>Population activity structure of excitatory and inhibitory neurons</b></i>,<br>PLoS One 12(8): e0181773 (2017)<br><a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0181773" class="red_over">PLoS One link</a>'
+  year: 2017
+-
+  item: 'Suway SB, Orellana J, McMorland AJC, Fraser GW, Liu Z, Velliste M, Chase SM, Kass RE, and Schwartz AB,<br><i><b>Temporally segmented directionality in the motor cortex</b></i>,<br>Cereb Cortex 2017 1-14. doi: 10.1093/cercor/bhx133 (2017)<br><a href="http://academic.oup.com/cercor/article/doi/10.1093/cercor/bhx133/3862195/Temporally-Segmented-Directionality-in-the-Motor?guestAccessKey=5b2a8dfb-99e2-4e51-bde5-7304d0e67bec" class="red_over">Cerebral Cortex link</a>'
+  year: 2017
+-
+  item: 'Rasmussen RG, Schwartz AB, and Chase SM,<br><i><b>Dynamic range adaptation in primary motor cortical populations</b></i>,<br>eLife 2017;6:e21409 (2017)<br><a href="http://elifesciences.org/content/6/e21409" class="red_over">eLife link</a>'
+  year: 2017
+-
+  item: 'Huggins JE, Guger C, Ziat M, Zander TO, Taylor D, Tangermann M, Soria-Frisch A, Simeral J, Scherer R, Rupp R, Ruffini G, Robinson DKR, Ramsey NF, Nijholt A, Muller-Putz G, McFarland DJ, Mattia D, Lance BJ, Kindermans PJ, Iturrate I, Herff C, Gupta D, Do AH, Collinger JL, Chavarriaga R, Chase SM, Bleichner MG, Batista A, Anderson CW, Aarnoutse EJ ,<br><i><b>Workshops of the sixth international brain-computer interface meeting: brain-computer interfaces past, present, and future</b></i>,<br>Brain-computer interfaces (2017)<br><a href="http://www.tandfonline.com/doi/full/10.1080/2326263X.2016.1275488" class="red_over">online link</a>'
+  year: 2017
+-
+  item: 'Zhang Y and Chase SM,<br><i><b>A control-theoretic approach to brain-computer interface design</b></i>,<br>American Controls Conference (in press) (2016)<br><a href="docs/zhang_acc_2016.pdf" class="red_over">Download pdf (406 KB)</a>'
+  year: 2016
+-
+  item: 'Oby ER, Perel S, Sadtler PT, Ruff DA, Mischel JL, Montez DF, Cohen MR, *Batista AP, and *Chase SM (* joint authorship),<br><i><b>Extracellular voltage threshold settings can be tuned for optimal encoding of movement and stimulus parameters</b></i>,<br>J Neural Eng. 13:036009 (2016)<br><a href="docs/oby_jne_2016.pdf" class="red_over">Download pdf (3.19 MB)</a>'
+  year: 2016
+-
+  item: 'Golub M, Chase SM, Batista AP, Yu BM,<br><i><b>Brain-computer interfaces for dissecting cognitive processes underlying sensorimotor control</b></i>,<br>Curr Opin Neurobiol 37:53-58 (2016)<br><a href="docs/golub_conb_2016.pdf" class="red_over">Download pdf (339 KB)</a>'
+  year: 2016
+-
+  item: 'Golub M, *Yu BM, *Chase SM (* joint authorship),<br><i><b>Internal models for interpreting neural population activity during sensorimotor control</b></i>,<br>Elife. doi: 10.7554/eLife.1001539:107-118 (2015)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/26646183" class="red_over">Pubmed Link</a>'
+  year: 2015
+-
+  item: 'Zhang Y, Chase SM,<br><i><b>Recasting brain-machine interface design from a physical control system perspective</b></i>,<br>J Comput Neurosci. 39:107-118 (2015)<br><a href="docs/zhang_jcns_2015.pdf" class="red_over">Download pdf (460 KB)</a>'
+  year: 2015
+-
+  item: 'Perel S, Sadtler PT, Oby ER, Ryu SI, Tyler-Kabara EC, *Batista AP, *Chase SM (* joint authorship),<br><i><b>Single-unit activity, threshold crossings, and local field potentials in motor cortex differentially encode reach kinematics</b></i>,<br>J Neurophysiol. 114:1500-1512 (2015)<br><a href="docs/perel_jnp_2015.pdf" class="red_over">Download pdf (1.16 MB)</a>'
+  year: 2015
+-
+  item: 'Kozai T, Du Z, Gugel Z, Smith MA, Chase SM, Bodily LM, Caparosa EM, Friedlander RM, and Cui XT,<br><i><b>Comprehensive chronic laminar single-unit, multi-unit, and local field potential recording performance with planar single shank electrode arrays</b></i>,<br>J Neurosci Meth. 242C:15-40 (2015)<br><a href="docs/kozai_JNSMeth_2015.pdf" class="red_over">Download pdf (10.17 MB)</a>'
+  year: 2015
+-
+  item: 'Sadtler PT, Quick KM, Golub MD, Chase SM, Ryu SI, Tyler-Kabara EC, *Yu BM, and *Batista AP (* joint authorship),<br><i><b>Neural constraints on learning</b></i>,<br>Nature 512:423-426 (2014)<br><a href="docs/sadtler_Nature_2014.pdf" class="red_over">Download pdf (1.29 MB)</a>'
+  year: 2014
+-
+  item: 'Todorova S, Sadtler P, Batista A, Chase S, and Ventura V,<br><i><b>To sort or not to sort: the impact of spike-sorting on neural decoding performance</b></i>,<br>J Neural Eng 11:056005 (2014)<br><a href="docs/todorova_jne_2014.pdf" class="red_over">Download pdf (893 KB)</a>'
+  year: 2014
+-
+  item: 'Golub MD, Yu BM, Schwartz AB, and Chase SM,<br><i><b>Motor-cortical control of movement speed with implications for brain-machine interface control</b></i>,<br>J Neurophysiol 112:411-429 (2014)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/24717350" class="red_over">Pubmed Link</a>'
+  year: 2014
+-
+  item: 'Yu BM and Chase SM,<br><i><b>Shedding light on learning</b></i>,<br>Nat. Neurosci. 17:746-747 (2014)<br><a href="docs/yu_nn_2014.pdf" class="red_over">Download pdf (349 KB)</a>'
+  year: 2014
+-
+  item: 'Zhang Y and Chase SM,<br><i><b>A stabilized dual Kalman filter for adaptive tracking of brain-computer interface decoding parameters</b></i>,<br>Proc 35th Annual Conf IEEE EMBS (2013)<br><a href="docs/zhang_embc_2013.pdf" class="red_over">Download pdf (1.78 MB)</a>'
+  year: 2013
+-
+  item: 'Perel S, Sadtler PT, Godlove JM, Ryu SI, Wang W, Batista AP, and Chase SM,<br><i><b>Direction and speed tuning of motor-cortex multi-unit activity and local field potentials during reaching movements</b></i>,<br>Proc 35th Annual Conf IEEE EMBS (2013)<br><a href="docs/perel_embc_2013.pdf" class="red_over">Download pdf (185 KB)</a>'
+  year: 2013
+-
+  item: 'Golub M, *Chase SM , and *Yu BM (* joint authorship),<br><i><b>Learning an internal dynamics model from control demonstration</b></i>,<br>In: Proceedings of The 30th International Conference on Machine Learning, JMLR W&CP 28:606-614 (2013)<br><a href="http://jmlr.org/proceedings/papers/v28/golub13.pdf" class="red_over">PDF Link</a>'
+  year: 2013
+-
+  item: 'Golub M, *Yu BM , and *Chase SM (* joint authorship),<br><i><b>Internal models engaged by brain-computer interface control</b></i>,<br>Proc 34th Annual Conf IEEE EMBS (2012)<br><a href="docs/golub_embc_2012.pdf" class="red_over">Download pdf (430 KB)</a>'
+  year: 2012
+-
+  item: 'Zhang Y, Schwartz AB, Chase SM, and Kass RE,<br><i><b>Bayesian learning in assisted brain-computer interface tasks [Finalist - student paper award]</b></i>,<br>Proc 34th Annual Conf IEEE EMBS (2012)<br><a href="docs/zhang_embc_2012.pdf" class="red_over">Download pdf (1.74 MB)</a>'
+  year: 2012
+-
+  item: 'Chase SM, Kass RE, Schwartz AB,<br><i><b>Behavioral and neural correlates of visuomotor adaptation observed through a brain-computer interface in primary motor cortex</b></i>,<br>J Neurophysiol. 2012 Jul;108(2):624-44 (2012)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/22496532" class="red_over">Pubmed Link</a>'
+  year: 2012
+-
+  item: 'Chase SM,<br><i><b>Single spikes may suffice</b></i>,<br>J. Neurophysiol. 108:1808-1809 (2012)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/22723673" class="red_over">Pubmed Link</a>'
+  year: 2012
+-
+  item: 'Chase SM and Schwartz AB,<br><i><b>Inference from populations: going beyond models</b></i>,<br>Enhancing performance for  Action and Perception, Progress in Brain Research Volume 192:103-112 (Green AC,  Chapman, E, Kalaska JF, &amp; Lepore F, eds) (2011)<br><a href="docs/chase schartz 2011.pdf" class="red_over">Download pdf (712 KB)</a>'
+  year: 2011
+-
+  item: 'Guger C, Bin G, Gao X, Guo J, Hong B, Liu T,  Gao S, Guan C, Ang KK, Phua KS, Wang C, Chin ZY, Zhang H, Lin R, Chua KSG, Kuah  C, Ang BT, George H, Kubler A, Halder S, Hosle A, Munbinger J, Palatucci M,  Pomerleau D, Hinton G, Mitchell T, Ryan DB, Sellers EW, Townsend G, Chase SM,  Whitford AS, Schwartz AB, Kawashima K, Shindo K, Ushiba J, Liu M and Schalk G,<br><i><b>State of the art in BCI research: BCI award 2010</b></i>,<br>Recent Advances in Brain-Computer  Interfaces (Fazel R, ed) (2011)<br><a href="docs/guger_bci_2011.pdf" class="red_over">Download pdf (972 KB)</a>'
+  year: 2011
+-
+  item: 'Chase SM, Schwartz AB, Kass RE,<br><i><b>Latent inputs improve estimates of neural encoding in motor cortex</b></i>,<br>J Neurosci. 2010 Oct 13;30(41):13873-82 (2010)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/20943928" class="red_over">Pubmed Link</a>'
+  year: 2010
+-
+  item: 'Legenstein R, Chase SM,  Schwartz AB, and Maass W,<br><i><b>A reward-modulated Hebbian learning rule can explain experimentally observed network reorganization in a brain control task</b></i>,<br>J Neurosci 30:8400-8410 (2010)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/20573887" class="red_over">Pubmed Link</a>'
+  year: 2010
+-
+  item: 'Koyama S, Chase SM,  Whitford A, Velliste M, Schwartz AB, and Kass RE,<br><i><b>Comparison between decoding algorithms in open-loop and closed-loop performance</b></i>,<br>J Comp Neurosci 29:73-87 (2010)<br><a href="docs/koyama_JCNS_2010.pdf" class="red_over">Download pdf (824 KB)</a>'
+  year: 2010
+-
+  item: 'Legenstein R, Chase SM,  Schwartz AB, and Maass W,<br><i><b>Functional network reorganization in motor cortex can be explained by reward-modulated Hebbian learning</b></i>,<br>Advances in Neural Information Processing  Systems 22 (2009)<br><a href="docs/legenstein_nips_2009.pdf" class="red_over">Download pdf (135 KB)</a>'
+  year: 2009
+-
+  item: 'Chase SM, Schwartz  AB, and Kass RE,<br><i><b>Bias, optimal linear estimation, and the differences between open-loop simulation and closed-loop performance of brain-computer interface algorithms</b></i>,<br>Neural Networks22:1203-1213 (2009)<br><a href="docs/chase_network_2009.pdf" class="red_over">Download pdf (2.39 MB)</a>'
+  year: 2009
+-
+  item: 'Fraser GW, Chase SM,  Whitford A, and Schwartz AB,<br><i><b>Control of a brain-computer interface without spike sorting</b></i>,<br>J Neural Eng 6:055004 (2009)<br><a href="docs/fraser_jne_2009.pdf" class="red_over">Download pdf (2.19 MB)</a>'
+  year: 2009
+-
+  item: '*Jarosiewicz B, *Chase  SM, Fraser GW, Velliste M, Kass RE, and Schwartz AB (*joint authorship),<br><i><b>Functional network reorganization during learning in a brain-computer interface paradigm</b></i>,<br>PNAS 105:19486-19491 (2008)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/19047633" class="red_over">Pubmed Link, Recommended by Faculty of 1000</a>'
+  year: 2008
+-
+  item: 'Chase SM and Young ED,<br><i><b>Cues for sound localization are encoded in different aspects of spike trains in the inferior colliculus</b></i>,<br>J Neurophysiol  99:1672-1682 (2008)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/18234986" class="red_over">Pubmed Link</a>'
+  year: 2008
+-
+  item: 'Chase SM and Young ED,<br><i><b>First-spike latency information in single neurons increases when referenced to population onset</b></i>,<br>PNAS 104:5175-5180 (2007)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/17360369" class="red_over">Pubmed Link</a>'
+  year: 2007
+-
+  item: 'Chase SM and Young ED,<br><i><b>Spike-timing codes enhance the representation of multiple simultaneous sound-localization cues in the inferior colliculus</b></i>,<br>J Neurosci 26:3889-3898 (2006)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/16611804" class="red_over">Pubmed Link, Ranked must read by Faculty of 1000</a>'
+  year: 2006
+-
+  item: 'Chase SM and Young ED,<br><i><b>Limited segregation of different types of sound localization information among classes of units in the inferior colliculus</b></i>,<br>J Neurosci 25:7575-7585 (2005)<br><a href="http://www.ncbi.nlm.nih.gov/pubmed/16107645" class="red_over">Pubmed Link, Recommended by Faculty of 1000</a>'
+  year: 2005
