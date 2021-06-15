@@ -24,58 +24,6 @@
 	font-size: small;
 }
 
-.person-item-list {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-.person-item-name {
-	font-weight: bold;
-}
-
-.person-item-img {
-	width: 150px;
-    max-width: 100%;
-    overflow: hidden;
-    @include border-radius(10px);
-    //margin: 0 auto;
-    display: block;
-}
-
-.person-item-interests {
-	font-size: small;
-}
-
-.year-buttons {
-  text-align: center;
-}
-
-.year-button {
-  @include border-radius(5px);
-  //background-color: #efefef;
-  border: 1px solid;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  margin: 0.5rem auto;
-  margin-right: 0.2em;
-  padding: 0.3rem;
-  //width: 220px;
-  font-size: small;
-  @include sans_light;
-  color: #333;
-  //line-height: 35px;
-  @include transition(all .2s ease);
-
-  &:hover {
-    background-color: #333;
-    color: #fff;
-  }
-
-  &.not-looking { width: 400px; }
-}
-
 .news-items {
     list-style: none;
     margin-left: 0;

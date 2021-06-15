@@ -4,8 +4,10 @@ title: Publications
 show_title: true
 ---
 
+<p>For an up-to-date list of publications, see <a href="https://scholar.google.com/citations?user=H-pgq9QAAAAJ&hl=en&oi=ao">Google Scholar</a>.</p>
+
 <div class="year-buttons">
-{% for year in site.data.papers reversed %}
+{% for year in site.data.papers | reversed %}
  {% assign yr = year[0] %}
  <a href="" class="year-button">{{ yr }}</a>
 {% endfor %}
