@@ -4,7 +4,7 @@ title: Publications
 show_title: true
 ---
 
-<p>For an up-to-date list of publications, see <a href="https://scholar.google.com/citations?user=H-pgq9QAAAAJ&hl=en&oi=ao">Google Scholar</a>.</p>
+<p>For an up-to-date list of publications, see <a href="https://scholar.google.com/citations?user=H-pgq9QAAAAJ&hl=en&oi=ao">Google Scholar</a>.<br/>Below, "*" denotes joint authorship.</p>
 
 <div class="year-buttons">
 {% for year in site.data.papers %}
@@ -20,7 +20,10 @@ show_title: true
 	<ul class="papers-list">
 	  {% for paper in site.data.papers[yr] %}
 	  <li class="paper-item">
-	    {{ paper.item }}
+	    {{ paper.authors }}<br>
+	    {{ paper.title }}<br>
+	    {{ paper.journal }} ({{ paper.year }})<br>
+	    {{ paper.link }}
 	  </li><br>
 	{% endfor %}
 	</ul>
