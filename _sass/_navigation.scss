@@ -1,5 +1,7 @@
 
 .nav-items {
+  font-variant: small-caps;
+  @include sans_regular;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -7,9 +9,6 @@
   position: fixed;
   top: 0;
   background: white;
-  //border-bottom: 0.5px solid #eee;
-  font-variant: small-caps;
-  @include sans_regular;
 }
 
 .nav-item {

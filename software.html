@@ -14,8 +14,9 @@ show_title: true
 	    	<a href="{{ item.paper_link }}">Paper</a>
 	    	<a href="{{ item.code_link }}">Code</a>
 		</span><br/>
+	    <img src="{{ item.image_path }}" class="img-software"/>
 	    <span class="software-item-description">{{ item.description }}</span>
-	    <img src="{{ item.image_path }}"/>
+	    <div style="float: none; clear: both;"></div>
 	  </div><hr>
 	{% endfor %}
 	</ul>
