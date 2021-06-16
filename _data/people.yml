@@ -1,6 +1,6 @@
-students:
+phd_students:
 - name: "Xiao Zhou"
-  image_path: "http://www.cnbc.cmu.edu/~schase/images/xiao2.jpg"
+  image_path: "http://www.cnbc.cmu.edu/~schase/images/xiao.jpg"
   image_path_moustache: ""
   interests: "Neural mechanisms of skill learning"
   type: "PhD student"
@@ -12,11 +12,11 @@ students:
   type: "PhD student"
   url: ""
 - name: "Jay Hennig"
-  image_path: "http://www.cnbc.cmu.edu/~schase/images/jay2.jpg"
+  image_path: "http://www.cnbc.cmu.edu/~schase/images/hennig.png"
   image_path_moustache: ""
   interests: "Machine Learning Tools for Analyzing Neural Population Activity; Neural Computation and Motor Control"
   type: "PhD student"
-  url: ""
+  url: "https://mobeets.github.io/me/"
 - name: "Brian Jeon"
   image_path: "http://www.cnbc.cmu.edu/~schase/images/Brian_Jeon.jpg"
   image_path_moustache: ""

@@ -1,4 +1,15 @@
 
+h2 {
+	clear: both;
+	@include sans_regular;
+	font-size: 1.75rem;
+}
+
+.person-item {
+	clear: both;
+	margin-bottom: 1em;
+}
+
 .person-item-list {
 	list-style-type: none;
 	margin: 0;
@@ -6,18 +17,25 @@
 }
 
 .person-item-name {
-	font-weight: bold;
+	@include sans_light;
+	font-size: 1.2rem;
+	display: block;
+	margin-bottom: 0.5em;
 }
 
 .person-item-img {
 	width: 150px;
-    max-width: 100%;
+    max-width: 80%;
     overflow: hidden;
-    @include border-radius(10px);
+    @include border-radius(3px);
+    //float: left;
     //margin: 0 auto;
-    display: block;
+    //display: block;
 }
 
 .person-item-interests {
+	margin-left: 1em;
+	float: left;
 	font-size: small;
+	width: 50%;
 }

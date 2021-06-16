@@ -4,10 +4,15 @@ show_title: false
 layout: page
 ---
 
-<img src="static/images/ChaseLabLogo.jpg" class="img-logo" style="width: 50%;"/>
+<div class="page-header">
+	<h1 class="header-name" itemprop="name">The Chase Lab at CMU</h1><br/>
+	<img src="static/images/lab_photo.jpg" class="lab-photo"/>
+	<img src="static/images/logos/chase_lab_logo.jpg" class="img-logo"/>
+	<img src="static/images/logos/cmni_logo.png" class="img-logo" itemprop="image">
+	<img src="static/images/logos/bme_logo.png" class="img-logo" itemprop="image">
+</div>
 
-<div class="resume-item">
-	<h3>News</h3>
+<div class="resume-item" style="clear: both;">
 	<ul class="news-items">
 	{% for item in site.data.news %}
 	  <li class="news-item">
