@@ -8,14 +8,14 @@ show_title: true
 	<ul class="resume-item-list papers-list">
 	{% for item in site.data.software %}
 	  <div class="software-item">
-	    <h3>{{ item.name }}</h3>
+	    <h2>{{ item.name }}</h2>
 	    <span class="software-item-links">
 	    	<a href="{{ item.paper_link }}">Paper</a>
 	    	<a href="{{ item.code_link }}">Code</a>
 		</span><br/>
 	    <span class="software-item-description">{{ item.description }}</span>
 	    <img src="{{ item.image_path }}"/>
-	  </div><br/>
+	  </div><hr>
 	{% endfor %}
 	</ul>
 </div>

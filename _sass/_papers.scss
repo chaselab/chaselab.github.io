@@ -1,6 +1,8 @@
+
 .year-buttons {
   text-align: center;
   max-width: 400px;
+  margin: auto;
 }
 
 .year-button {
@@ -33,34 +35,41 @@
     margin-left: 0;
     padding-left: 0;
 }
+
 .paper-item {
+    @include sans_light;
     margin-top: 1.5em;
     margin-left: 0;
     padding: 1em;
     border-radius: 10px;
-    border: 1px black;
+    border: 1px #eee;;
     border-style: solid;
 }
+
 .paper-link {
     font-size: small;
     text-decoration: none;
     border-bottom: dotted 1px black;
 }
+
 .paper-title {
     @include sans_bold;
     clear: both;
     font-size: 1.3rem;
 }
+
 .paper-content {
     clear: both;
     overflow: auto;
     padding-top: 1em;
 }
+
 .paper-image {
     margin-right: 1em;
     float: left;
     padding-bottom: 1em;
 }
+
 .paper-brief {
     text-align: justify;
     float: left;

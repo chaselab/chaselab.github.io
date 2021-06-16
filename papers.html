@@ -13,15 +13,16 @@ show_title: true
 {% endfor %}
 </div>
 
+<hr>
 <div class="resume-item">
 	{% for year in site.data.papers %}
 	{% assign yr = year[0] %}
-	<h3>{{ yr }}</h3>
+	<h2>{{ yr }}</h2>
 	<ul class="papers-list">
 	  {% for paper in site.data.papers[yr] %}
 	  <li class="paper-item">
-	    {{ paper.authors }}<br>
 	    {{ paper.title }}<br>
+	    {{ paper.authors }}<br>
 	    {{ paper.journal }} ({{ paper.year }})<br>
 	    {{ paper.link }}
 	  </li><br>
