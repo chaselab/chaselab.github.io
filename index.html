@@ -16,7 +16,7 @@ layout: page
 	<ul class="news-items">
 	{% for item in site.data.news %}
 	  <li class="news-item">
-	    {{ item.date }} - {{ item.comment }}
+	    <span class="news-date">{{ item.date }}</span><span class="news-comment">{{ item.comment }}</span>
 	  </li><br>
 	{% endfor %}
 	</ul>

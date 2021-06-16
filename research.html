@@ -4,16 +4,17 @@ title: Research
 show_title: true
 ---
 
+<hr>
 <div class="research-image">
 <img src="static/images/scientists_peering_into_brain.jpg" style="width: 50%;"/><span class="img-description">Credit: Sonya Todorova</span>
-</div>
+</div><br/><br/>
 
 <div class="resume-item">
 	{% for item in site.data.research %}
 	  <div class="research-item">
-	    <h3>{{ item.name }}</h3>
+	    <h2>{{ item.name }}</h2>
 	    {{ item.description }}
-	  </div><br>
+	  </div><hr>
 	{% endfor %}
 </div>
 

@@ -3,11 +3,18 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: white;
+  //border-bottom: 0.5px solid #eee;
+  font-variant: small-caps;
+  @include sans_regular;
 }
 
 .nav-item {
   float: left;
-  border-left: 1px solid black;
+  //border-left: 1px solid #eee;
 }
 
 .nav-item a {
@@ -25,7 +32,7 @@
 
 .nav-logo {
   float: left;
-  margin: 20px;
+  margin-right: 20px;
   margin-top: 14px;
   width: 4em;
 }
@@ -35,10 +42,21 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .nav-items {
+    position: static;
+    top: auto; 
+    border-bottom: none;
+  }
+
   .nav-item {
     width: 100%;
     border-left: none;
   }
+
+  .nav-item a {
+    padding: 0.3em 0em;
+  }
+
   .nav-logo {
     float: none;
     display: block;
@@ -46,7 +64,8 @@
     margin-right: auto;
     width: 30%;
   }
+
   .nav-item:last-child {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #eee;
   }
 }
