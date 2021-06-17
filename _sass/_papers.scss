@@ -23,55 +23,44 @@
   @include transition(all .2s ease);
 
   &:hover {
-    background-color: #333;
+    background-color: #4287f5;
     color: #fff;
   }
-
-  &.not-looking { width: 400px; }
 }
 
 .papers-list {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .paper-item {
-    @include sans_light;
-    margin-top: 1.5em;
-    margin-left: 0;
-    padding: 1em;
-    border-radius: 10px;
-    border: 1px #eee;;
-    border-style: solid;
-}
-
-.paper-link {
-    font-size: small;
-    text-decoration: none;
-    border-bottom: dotted 1px black;
+  @include sans_light;
+  margin-top: 1.5em;
+  margin-left: 0;
+  padding: 1em;
+  border-radius: 10px;
+  border: 1px #eee;;
+  border-style: solid;
 }
 
 .paper-title {
-    @include sans_bold;
-    clear: both;
-    font-size: 1.3rem;
+  @include sans_regular;
+  clear: both;
+  font-size: 1.3rem;
 }
 
-.paper-content {
-    clear: both;
-    overflow: auto;
-    padding-top: 1em;
-}
-
-.paper-image {
-    margin-right: 1em;
-    float: left;
-    padding-bottom: 1em;
-}
-
-.paper-brief {
-    text-align: justify;
-    float: left;
-    display: contents;
+.paper-link {
+  font-size: small;
+  text-decoration: none;
+  color: #333;
+  
+  padding: 0.2rem;
+  margin-right: 0.2em;
+  @include border-radius(9px);
+  border: 1px solid #888;
+  &:hover {
+    background-color: #333;
+    color: #eee;
+  }
 }
