@@ -1,4 +1,33 @@
+2021:
+  -
+    title: "Learning is shaped by abrupt changes in neural engagement"
+    authors: "JA Hennig, ..., AP Batista*, SM Chase*, BM Yu*"
+    journal: "Nature Neuroscience"
+    volume: "1546-1726"
+    year: 2021
+    paper_url: "https://www.nature.com/articles/s41593-021-00822-8"
+    code_url: 'https://github.com/mobeets/neural-engagement'
+    press_url: ''
+2020:
+  -
+    title: "Intracortical Brain-Machine Interfaces"
+    authors: "ER Oby, JA Hennig, AP Batista, BM Yu, SM Chase"
+    journal: "Neural Engineering, 3rd Edition"
+    volume: "185-221"
+    year: 2020
+    paper_url: "https://link.springer.com/chapter/10.1007/978-3-030-43395-6_5"
+    code_url: ''
+    press_url: ''
 2019:
+  -
+    title: "New neural activity patterns emerge with long-term learning"
+    authors: "ER Oby, MD Golub, JA Hennig, ..., BM Yu*, SM Chase*, AP Batista*"
+    journal: "Proceedings of the National Academy of Sciences"
+    volume: "116 (30), 15210-15215"
+    year: 2019
+    paper_url: "https://www.pnas.org/content/116/30/15210.short"
+    code_url: ''
+    press_url: ''
   -
     authors: 'Zhou X, Tien R, Ravikumar S, Chase SM'
     title: 'Distinct types of neural reorganization during long-term learning'
