@@ -8,6 +8,15 @@
     paper_url: "https://www.nature.com/articles/s41593-021-00822-8"
     code_url: 'https://github.com/mobeets/neural-engagement'
     press_url: ''
+  -
+    title: "Distinct kinematic adjustments over multiple timescales accompany locomotor skill development in mice"
+    authors: "KP Nguyen, A Sharma, M Gil-Silva, AH Gittis*, SM Chase*"
+    journal: "Neuroscience"
+    volume: "466"
+    year: 2021
+    paper_url: "https://doi.org/10.1016/j.neuroscience.2021.05.002"
+    code_url: 'https://github.com/katpnug/RotaWheel'
+    press_url: ''
 2020:
   -
     title: "Intracortical Brain-Machine Interfaces"
