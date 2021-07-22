@@ -53,7 +53,7 @@ layout: page
 		    {% endif %}
 		</span>
 	    <div style="float: left;">
-	    	<img src="{{ person.image_path }}" class="person-item-img"/>
+	    	<img src="{{ person.image_path }}" class="person-item-img" onmouseover="this.src='{{ person.image_path_moustache }}'" onmouseout="this.src='{{ person.image_path }}'" />
 	    </div>
 	    <span class="person-item-interests"><i>Research interests:</i> {{ person.interests }}</span>
 	    <div style="float: none; clear: both;"></div>
@@ -75,7 +75,7 @@ layout: page
 	    	{{ person.name }}
 	    {% endif %}
 		</span>
-	    <img src="{{ person.image_path }}" class="person-item-img"/>
+	    <img src="{{ person.image_path }}" class="person-item-img" onmouseover="this.src='{{ person.image_path_moustache }}'" onmouseout="this.src='{{ person.image_path }}'" />
 	  </li>
 	{% endfor %}
 	</ul>
