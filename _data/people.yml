@@ -42,7 +42,7 @@ phd_students:
   type: "PhD student"
   url: ""
 - name: "Adam Smoulder"
-  image_path: "static/images/people/adam.png"
+  image_path: "static/images/people/adam.jpg"
   image_path_moustache: "static/images/people/adam2.jpg"
   interests: "motor learning and reward"
   type: "PhD student"
