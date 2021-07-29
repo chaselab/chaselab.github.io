@@ -17,6 +17,15 @@
     paper_url: "https://doi.org/10.1016/j.neuroscience.2021.05.002"
     code_url: 'https://github.com/katpnug/RotaWheel'
     press_url: ''
+  -
+    title: "Development of natural scene representation in primary visual cortex requires early postnatal experience"
+    authors: "N Kowalewski*, J Kauttonen*, PL Stan, BJ Jeon, T Fuchs, SM Chase, TS Lee, SJ Kuhlman"
+    journal: "Current Biology"
+    volume: "31"
+    year: 2021
+    paper_url: "https://pubmed.ncbi.nlm.nih.gov/33220181/"
+    code_url: ''
+    press_url: ''
 2020:
   -
     title: "Intracortical Brain-Machine Interfaces"
