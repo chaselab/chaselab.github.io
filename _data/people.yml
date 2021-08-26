@@ -22,7 +22,7 @@ phd_students:
   image_path_moustache: "static/images/people/carmen2.jpg"
   interests: "volitional modulation of single neurons; sensorimotor integration; BCI learning; motor control"
   type: "PhD student"
-  url: "https://cffisac.github.io/"
+  url: "https://sites.google.com/andrew.cmu.edu/carmen"
 - name: "Katrina Nguyen"
   image_path: "static/images/people/katrina.jpg"
   image_path_moustache: "static/images/people/katrina2.jpg"
