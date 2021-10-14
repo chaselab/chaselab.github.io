@@ -1,5 +1,5 @@
 - name: "86-631/42-631: Neural Data Analysis"
-  units: 9
+  units: 12
   description: "The vast majority of behaviorally relevant information is transmitted through the brain by neurons as trains of actions potentials. How can we understand the information being transmitted? This class will cover the basic engineering and statistical tools in common use for analyzing neural spike train data, with an emphasis on hands-on application. Topics will include neural spike train statistics, estimation theory (MLE, MAP), signal detection theory (d-prime, ROC analysis), information theory (entropy, mutual information, neural coding theories, spike-distance metrics), discrete classification (naive Bayes), continuous decoding (PVA, OLE, Kalman), and white-noise analysis. Each topic covered will be linked back to the central ideas from undergraduate probability, and each assignment will involve actual analysis of neural data, either real or simulated, using Matlab. This class is meant for upper-level undergrads or beginning graduate students, and is geared to the engineer who wants to learn the neurophysiologist's toolbox and the neurophysiologist who wants to learn new tools."
 - name: "86-601: Topics in Motor Control"
   units: 3
