@@ -10,7 +10,7 @@ phd_students:
   image_path_moustache: "static/images/people/katrina2.jpg"
   interests: "Neural circuitry of learning"
   type: "PhD student"
-  url: ""
+  url: "https://katpnug.github.io/"
 - name: "Tze Hui Koh"
   image_path: "static/images/people/tzehui.jpg"
   image_path_moustache: "static/images/people/tzehui2.jpg"
