@@ -1,7 +1,21 @@
+- date: "2022/08/01"
+  comment: 'Congrats to Carmen on her successful thesis defense!'
+- date: "2022/07/06"
+  comment: 'Congrats to Darby and Jay for publishing their work on a "memory trace" in the motor cortex to <a href="https://www.biorxiv.org/content/10.1101/2022.07.05.498856v1.abstract">biorxiv</a>!
+- date: "2022/06/25"
+  comment: 'Congrats to Brian on his <a href="https://www.nature.com/articles/s41467-022-31440-y">Nature Communications</a> publication showing BCI learning in visual cortex does not perturb existing function!
+- date: "2022/05/20"
+  comment: 'Awesome job to Adam for his <a href="https://www.pnas.org/content/118/35/e2109643118">PNAS</a> receiving the CNBC best paper award!
+- date: "2022/03/14"
+  comment: 'Congrats to Tze Hui and Brian on their biorxiv publication on <a href="https://www.biorxiv.org/content/10.1101/2022.03.11.480682v1.abstract">Dimensionality reduction of calcium-imaged neuronal population activity</a>!
+- date: "2021/12/01"
+  comment: 'Congratulations, Jay and Darby, whose perspectives piece relating artificial and biological learning was published in <a href="https://www.sciencedirect.com/science/article/abs/pii/S0896627321006772">Neuron</a>!'
 - date: "2021/09/01"
   comment: 'Congratulations, Brian, for successfully defending your thesis!'
 - date: "2021/08/31"
   comment: 'Great work, Adam, whose paper demonstrating choking under pressure in animals was just published in <a href="https://www.pnas.org/content/118/35/e2109643118">PNAS</a>!'
+- date: "2021/08/24"
+  comment: 'Congrats, Adam, on passing your thesis proposal!'
 - date: "2021/05/24"
   comment: 'Congratulations, Katrina, whose <a href="https://doi.org/10.1016/j.neuroscience.2021.05.002">Neuroscience paper</a> on the novel RotaWheel has just come out! Read the commentary <a href="https://doi.org/10.1016/j.neuroscience.2021.05.004">here</a>!'
 - date: "2021/03/29"
@@ -12,6 +26,8 @@
   comment: 'Our paper on BCI stabilization is published in <a href="https://www.nature.com/articles/s41551-020-0542-9.pdf">Nature BME</a>, check it out!'
 - date: "2020/03/23"
   comment: 'Congratulations, Xiao, for successfully defending your thesis!'
+- date: "2019/09/20"
+  comment: 'Great job, Adam, for your outstanding poster award at the CMU Biomedical Engineering Forum!'
 - date: "2019/08/22"
   comment: 'Congratulations, Katrina, for passing your thesis proposal!'
 - date: "2019/07/15"
