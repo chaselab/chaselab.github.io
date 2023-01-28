@@ -48,7 +48,7 @@ alumni:
   url: "https://mobeets.github.io/me/"
 - name: "Pete Lund"
   affiliation: "MS (Bloomberg, New York NY)"
-  - name: "Katrina Nguyen"
+- name: "Katrina Nguyen"
   affiliation: "PhD (Postdoc, University of Colorado, Aurora CO)"
   url: "https://katpnug.github.io/"
 - name: "Sagi Perel"
