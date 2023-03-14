@@ -1,4 +1,50 @@
+2022:
+  -
+    title: "Dimensionality reduction of calcium-imaged neuronal population activity"
+    authors: "TH Koh, WE Bishop, T Kawashima, BB Jeon, ..., SM Chase*, BM Yu*"
+    journal: "Nature Computational Science"
+    volume: ""
+    year: 2022
+    paper_url: "https://www.nature.com/articles/s43588-022-00390-2"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Visual experience has opposing influences on the quality of stimulus representation in adult primary visual cortex"
+    authors: "BB Jeon, T Fuchs, SM Chase, SJ Kuhlman"
+    journal: "eLife"
+    volume: ""
+    year: 2022
+    paper_url: "https://elifesciences.org/articles/80361"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Existing function in primary visual cortex is not perturbed by new skill acquisition of a non-matched sensory task"
+    authors: "BB Jeon, T Fuchs, SM Chase, SJ Kuhlman"
+    journal: "eLife"
+    volume: ""
+    year: 2022
+    paper_url: "https://elifesciences.org/articles/80361"
+    code_url: ''
+    press_url: ''
 2021:
+  -
+    title: "How learning unfolds in the brain: toward an optimization view"
+    authors: "JA Hennig, ER Oby, DM Losey, AP Batista*, SM Chase*, BM Yu*"
+    journal: "Neuron"
+    volume: "109"
+    year: 2021
+    paper_url: "https://www.sciencedirect.com/science/article/pii/S0896627321006772"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Monkeys exhibit a paradoxical decrease in performance in high-stakes scenarios"
+    authors: "AL Smoulder^, NP Pavlovsky^, PJ Marino^, ..., AP Batista*, SM Chase*"
+    journal: "Proceedings of the National Academy of Sciences"
+    volume: ""
+    year: 2021
+    paper_url: "https://www.pnas.org/doi/abs/10.1073/pnas.2109643118"
+    code_url: ''
+    press_url: ''
   -
     title: "Learning is shaped by abrupt changes in neural engagement"
     authors: "JA Hennig, ..., AP Batista*, SM Chase*, BM Yu*"
