@@ -29,6 +29,12 @@ phd_students:
   interests: "motor learning and reward"
   type: "Masters student"
   url: ""
+- name: "Noah Freedman"
+  image_path: "static/images/people/noah.jpg"
+  image_path_moustache: "static/images/people/noah2.jpg"
+  interests: "BCI learning and communication"
+  type: "PhD student"
+  url: ""
 
 
 affiliated:
