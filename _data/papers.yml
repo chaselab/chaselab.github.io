@@ -1,3 +1,15 @@
+2023:
+  -
+    title: "A neural basis of choking under pressure"
+    authors: "AL Smoulder, PJ Marino, ER Oby, SE Snyder, ..., SM Chase*, AP Batista*"
+    journal: "bioRxiv"
+    volume: ""
+    year: 2023
+    paper_url: "https://www.biorxiv.org/content/10.1101/2023.04.16.537007v1"
+    code_url: 'bioRxiv'
+    press_url: ''
+
+
 2022:
   -
     title: "Dimensionality reduction of calcium-imaged neuronal population activity"
@@ -26,6 +38,16 @@
     paper_url: "https://www.nature.com/articles/s41467-022-31440-y"
     code_url: ''
     press_url: ''
+  -
+    title: "Learning alters neural activity to simultaneously support memory and action"
+    authors: "DM Losey, JA Hennig, ER Oby, MD Golub, ..., AP Batista*, BM Yu*, SM Chase*"
+    journal: "Nature Computational Science"
+    volume: ""
+    year: 2022
+    paper_url: "https://www.biorxiv.org/content/10.1101/2022.07.05.498856v1"
+    code_url: ''
+    press_url: ''
+
 2021:
   -
     title: "How learning unfolds in the brain: toward an optimization view"
