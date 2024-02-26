@@ -41,6 +41,30 @@ layout: page
 </div>
 
 <hr>
+<h2>Post Doc</h2>
+<div class="resume-item">
+	<ul class="person-item-list">
+	{% for person in site.data.people.post_docs %}
+	  <li class="person-item">
+	  	<span class="person-item-name">
+		    {% if person.url and person.url != "" %}
+		    	<a href="{{ person.url }}">{{ person.name }}</a>
+		    {% else %}
+		    	{{ person.name }}
+		    {% endif %}
+		</span>
+	    <div style="float: left;">
+	    	<img src="{{ person.image_path }}" class="person-item-img" onmouseover="this.src='{{ person.image_path_moustache }}'" onmouseout="this.src='{{ person.image_path }}'" />
+	    </div>
+	    <span class="person-item-interests"><i>Research interests:</i> {{ person.interests }}</span>
+	    <div style="float: none; clear: both;"></div>
+	  </li>
+	{% endfor %}
+	</ul>
+</div>
+<hr>
+
+<hr>
 <h2>PhD Students</h2>
 <div class="resume-item">
 	<ul class="person-item-list">
