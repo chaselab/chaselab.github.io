@@ -2,7 +2,7 @@
 post_docs:
 - name: "Noga Larry"
   image_path: "static/images/people/noga.jpg"
-  image_path_moustache: "static/images/people/noga.jpg"
+  image_path_moustache: "static/images/people/noga2.jpg"
   interests: "multi-area communication"
   type: "PostDoc"
   url: ""
@@ -28,7 +28,7 @@ phd_students:
   url: ""
 - name: "Noah Freedman"
   image_path: "static/images/people/noah.jpg"
-  image_path_moustache: "static/images/people/noah.jpg"
+  image_path_moustache: "static/images/people/noah2.jpg"
   interests: "BCI learning and communication"
   type: "PhD student"
   url: ""
