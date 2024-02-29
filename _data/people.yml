@@ -34,7 +34,7 @@ phd_students:
   url: ""
 - name: "Tom Schoenherr"
   image_path: "static/images/people/notYet.jpg"
-  image_path_moustache: "static/images/people/notYet.jpg"
+  image_path_moustache: "static/images/people/tom2.jpg"
   interests: "human BCI and neural signal processing"
   type: "Master student"
   url: ""
