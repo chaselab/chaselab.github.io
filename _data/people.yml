@@ -7,7 +7,7 @@ post_docs:
   type: "PostDoc"
   url: ""
 
-gradute_students:
+graduate_students:
 - name: "Adam Smoulder"
   image_path: "static/images/people/adam.jpg"
   image_path_moustache: "static/images/people/adam2.jpg"
