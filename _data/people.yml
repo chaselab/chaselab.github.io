@@ -45,7 +45,7 @@ graduate_students:
   type: "PhD student (Smith Lab and Yu Lab)"
   url: ""
 - name: "Adithya Narayan"
-  image_path: "static/images/people/adithya.jpg"
+  image_path: "static/images/people/adithya.png"
   image_path_moustache: "static/images/people/adithya2.jpg"
   interests: "Perception, decision making, and motor control"
   type: "PhD student (Smith Lab and Batista Lab)"
