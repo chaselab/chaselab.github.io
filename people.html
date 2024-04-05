@@ -68,7 +68,7 @@ layout: page
 <h2>PhD Students</h2>
 <div class="resume-item">
 	<ul class="person-item-list">
-	{% for person in site.data.people.phd_students %}
+	{% for person in site.data.people.graduate_students %}
 	  <li class="person-item">
 	  	<span class="person-item-name">
 		    {% if person.url and person.url != "" %}
@@ -80,7 +80,8 @@ layout: page
 	    <div style="float: left;">
 	    	<img src="{{ person.image_path }}" class="person-item-img" onmouseover="this.src='{{ person.image_path_moustache }}'" onmouseout="this.src='{{ person.image_path }}'" />
 	    </div>
-	    <span class="person-item-interests"><i>Research interests:</i> {{ person.interests }}</span>
+	    <span class="person-item-type"><i>{{ person.type }}</i></span>
+		<span class="person-item-interests"><i>Research interests:</i> {{ person.interests }}</span>
 	    <div style="float: none; clear: both;"></div>
 	  </li>
 	{% endfor %}

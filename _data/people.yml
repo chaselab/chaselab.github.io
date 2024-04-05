@@ -7,7 +7,7 @@ post_docs:
   type: "PostDoc"
   url: ""
 
-phd_students:
+gradute_students:
 - name: "Adam Smoulder"
   image_path: "static/images/people/adam.jpg"
   image_path_moustache: "static/images/people/adam2.jpg"
@@ -37,6 +37,18 @@ phd_students:
   image_path_moustache: "static/images/people/tom2.jpg"
   interests: "human BCI and neural signal processing"
   type: "Master student"
+  url: ""
+- name: "Megan McDonnell"
+  image_path: "static/images/people/megan.jpg"
+  image_path_moustache: "static/images/people/megan2.jpg"
+  interests: "BCI and inter-area communication!"
+  type: "PhD student (Smith Lab and Yu Lab)"
+  url: ""
+- name: "Adithya Narayan"
+  image_path: "static/images/people/adithya.jpg"
+  image_path_moustache: "static/images/people/adithya2.jpg"
+  interests: "Perception, decision making, and motor control"
+  type: "PhD student (Smith Lab and Batista Lab)"
   url: ""
 
 
