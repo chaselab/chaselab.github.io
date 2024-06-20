@@ -50,7 +50,12 @@ graduate_students:
   interests: "Perception, decision making, and motor control"
   type: "PhD student (Smith Lab and Batista Lab)"
   url: ""
-
+- name: "Noah Freedman"
+  image_path: "static/images/people/noah.jpg"
+  image_path_moustache: "static/images/people/jingkai2.jpg"
+  interests: "BCI learning & inter-area communication"
+  type: "PhD student"
+  url: ""
 
 affiliated:
 - name: "Prof. Agustin Gutierrez Galvez (on sabbatical)"
