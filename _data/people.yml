@@ -17,7 +17,7 @@ graduate_students:
 - name: "Hiroo Miyata"
   image_path: "static/images/people/hiroo.jpg"
   image_path_moustache: "static/images/people/hiroo2.jpg"
-  interests: "motor learning and reward"
+  interests: "motor control and internal state"
   type: "PhD student (Batista Lab)"
   url: ""
 - name: "Jingkai Wen"
@@ -55,6 +55,12 @@ graduate_students:
   image_path_moustache: "static/images/people/will.jpg"
   interests: "brain-computer interfaces, motor control, neural signal processing & machine learning"
   type: "PhD student (Yu and Batista Lab)"
+  url: ""
+- name: "Alexis Valencia"
+  image_path: "static/images/people/alexis.jpg"
+  image_path_moustache: "static/images/people/alexis.jpg"
+  interests: "BCI and Motor Learning"
+  type: "Master student"
   url: ""
 
 
