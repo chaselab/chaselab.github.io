@@ -6,19 +6,19 @@ post_docs:
   interests: "multi-area communication"
   type: "PostDoc"
   url: ""
-
-graduate_students:
 - name: "Adam Smoulder"
   image_path: "static/images/people/adam.jpg"
   image_path_moustache: "static/images/people/adam2.jpg"
   interests: "motor learning and reward"
-  type: "PhD student"
+  type: "PostDoc"
   url: "https://asmoulder3195.wixsite.com/main"
+
+graduate_students:
 - name: "Hiroo Miyata"
   image_path: "static/images/people/hiroo.jpg"
   image_path_moustache: "static/images/people/hiroo2.jpg"
   interests: "motor learning and reward"
-  type: "PhD student"
+  type: "PhD student (Batista Lab)"
   url: ""
 - name: "Jingkai Wen"
   image_path: "static/images/people/jingkai.jpg"
@@ -30,7 +30,7 @@ graduate_students:
   image_path: "static/images/people/noah.jpg"
   image_path_moustache: "static/images/people/noah2.jpg"
   interests: "BCI learning and communication"
-  type: "PhD student"
+  type: "PhD student (Yu and Batista Lab)"
   url: ""
 - name: "Tom Schoenherr"
   image_path: "static/images/people/tom.jpg"
@@ -49,6 +49,12 @@ graduate_students:
   image_path_moustache: "static/images/people/adithya2.jpg"
   interests: "Perception, decision making, and motor control"
   type: "PhD student (Smith Lab and Batista Lab)"
+  url: ""
+- name: "Will Noll"
+  image_path: "static/images/people/will.jpg"
+  image_path_moustache: "static/images/people/will.jpg"
+  interests: "brain-computer interfaces, motor control, neural signal processing & machine learning"
+  type: "PhD student (Yu and Batista Lab)"
   url: ""
 
 
