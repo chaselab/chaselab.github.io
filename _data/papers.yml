@@ -1,25 +1,89 @@
-2023:
+2024:
   -
     title: "A neural basis of choking under pressure"
-    authors: "AL Smoulder, PJ Marino, ER Oby, SE Snyder, ..., SM Chase*, AP Batista*"
+    authors: "AL Smoulder, PJ Marino, ER Oby, SE Snyder, ... SM Chase*, AP Batista*"
+    journal: "Neuron"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.cell.com/neuron/fulltext/S0896-6273(24)00608-1"
+    code_url: ''
+    press_url: 'https://www.washingtonpost.com/wellness/2024/08/08/olympics-choking-pressure-yips-strategies/'
+  -
+    title: "Dissociating the influence of limb posture and visual feedback shifts on the adaptation to novel movement dynamics"
+    authors: "JJ Fitzgerald, W Zhou, SM Chase, WM Joiner"
+    journal: "Neuroscience"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.sciencedirect.com/science/article/pii/S0306452224001118"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Learning leaves a memory trace in motor cortex"
+    authors: "DM Losey, JA Hennig, ER Oby, MD Golub, ... AP Batista*, BM Yu*, SM Chase*"
+    journal: "Current Biology"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.cell.com/current-biology/fulltext/S0960-9822(24)00298-7"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Motor cortex retains and reorients neural dynamics during motor imagery"
+    authors: "BM Dekleva, RH Chowdhury, AP Batista, SM Chase, BM Yu, ML Boninger, JL Collinger"
+    journal: "Nature Human Behavior"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.nature.com/articles/s41562-023-01804-5"
+    code_url: ''
+    press_url: ''
+  -
+    title: "A posture subspace in primary motor cortex"
+    authors: "PJ Marino, L Bahureksa, CF Fisac, ER Oby...SM Chase*, BM Yu*, AP Batista*"
+    journal: "biorxiv"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.biorxiv.org/content/10.1101/2024.08.12.607361v1.abstract"
+    code_url: ''
+    press_url: ''
+  -
+    title: "Motor somatotopy impacts imagery strategy success in human intracortical brain-computer interfaces"
+    authors: "NG Kunigk, HR Schone, ... SM Chase, ML Boninger, BD Dekleva, JL Collinger"
+    journal: "medRxiv"
+    volume: ""
+    year: 2024
+    paper_url: "https://www.medrxiv.org/content/10.1101/2024.08.01.24311180v1.full.pdf+html"
+    code_url: ''
+    press_url: ''
+  -
+    title: "A theory of brain-computer interface learning via low-dimensional control"
+    authors: "JA Menéndez, JA Hennig, MD Golub, ER Oby, PT Sadtler, AP Batista, SM Chase, BM Yu, PE Latham"
     journal: "bioRxiv"
     volume: ""
-    year: 2023
-    paper_url: "https://www.biorxiv.org/content/10.1101/2023.04.16.537007v1"
-    code_url: 'bioRxiv'
+    year: 2024
+    paper_url: "https://www.biorxiv.org/content/10.1101/2024.04.18.589952v1"
+    code_url: ''
     press_url: ''
-
-
-2022:
+    
+2023:
+  -
+    title: "Sensory constraints on volitional modulation of motor cortex"
+    authors: "CF Fisac, SM Chase"
+    journal: "biorxiv"
+    volume: ""
+    year: 2023
+    paper_url: "https://www.biorxiv.org/content/10.1101/2023.01.22.525098v1.abstract"
+    code_url: ''
+    press_url: ''
   -
     title: "Dimensionality reduction of calcium-imaged neuronal population activity"
     authors: "TH Koh, WE Bishop, T Kawashima, BB Jeon, ..., SM Chase*, BM Yu*"
     journal: "Nature Computational Science"
     volume: ""
-    year: 2022
+    year: 2023
     paper_url: "https://www.nature.com/articles/s43588-022-00390-2"
     code_url: ''
     press_url: ''
+
+2022:
   -
     title: "Visual experience has opposing influences on the quality of stimulus representation in adult primary visual cortex"
     authors: "BB Jeon, T Fuchs, SM Chase, SJ Kuhlman"
@@ -36,15 +100,6 @@
     volume: ""
     year: 2022
     paper_url: "https://www.nature.com/articles/s41467-022-31440-y"
-    code_url: ''
-    press_url: ''
-  -
-    title: "Learning alters neural activity to simultaneously support memory and action"
-    authors: "DM Losey, JA Hennig, ER Oby, MD Golub, ..., AP Batista*, BM Yu*, SM Chase*"
-    journal: "Nature Computational Science"
-    volume: ""
-    year: 2022
-    paper_url: "https://www.biorxiv.org/content/10.1101/2022.07.05.498856v1"
     code_url: ''
     press_url: ''
 
@@ -66,6 +121,15 @@
     year: 2021
     paper_url: "https://www.pnas.org/doi/abs/10.1073/pnas.2109643118"
     code_url: ''
+    press_url: 'https://www.wired.com/story/youre-not-alone-monkeys-choke-under-pressure-too/'
+  -
+    title: "Distinct kinematic adjustments over multiple timescales accompany locomotor skill development in mice"
+    authors: "KP Nguyen, A Sharma, M Gil-Silva, AH Gittis*, SM Chase*"
+    journal: "Neuroscience"
+    volume: "466"
+    year: 2021
+    paper_url: "https://doi.org/10.1016/j.neuroscience.2021.05.002"
+    code_url: 'https://github.com/katpnug/RotaWheel'
     press_url: ''
   -
     title: "Learning is shaped by abrupt changes in neural engagement"
@@ -77,15 +141,6 @@
     code_url: 'https://github.com/mobeets/neural-engagement'
     press_url: 'https://engineering.cmu.edu/news-events/news/2021/03/29-engagement-learning.html'
   -
-    title: "Distinct kinematic adjustments over multiple timescales accompany locomotor skill development in mice"
-    authors: "KP Nguyen, A Sharma, M Gil-Silva, AH Gittis*, SM Chase*"
-    journal: "Neuroscience"
-    volume: "466"
-    year: 2021
-    paper_url: "https://doi.org/10.1016/j.neuroscience.2021.05.002"
-    code_url: 'https://github.com/katpnug/RotaWheel'
-    press_url: ''
-  -
     title: "Development of natural scene representation in primary visual cortex requires early postnatal experience"
     authors: "N Kowalewski*, J Kauttonen*, PL Stan, BJ Jeon, T Fuchs, SM Chase, TS Lee, SJ Kuhlman"
     journal: "Current Biology"
@@ -94,6 +149,7 @@
     paper_url: "https://pubmed.ncbi.nlm.nih.gov/33220181/"
     code_url: ''
     press_url: ''
+    
 2020:
   -
     title: "Stabilization of a brain-computer interface via the alignment of low-dimensional spaces of neural activity"
@@ -113,6 +169,7 @@
     paper_url: "https://link.springer.com/chapter/10.1007/978-3-030-43395-6_5"
     code_url: ''
     press_url: ''
+    
 2019:
   -
     title: "New neural activity patterns emerge with long-term learning"
@@ -124,16 +181,17 @@
     code_url: ''
     press_url: ''
   -
-    authors: 'Zhou X, Tien R, Ravikumar S, Chase SM'
+    authors: 'X Zhou, R Tien, S Ravikumar, SM Chase'
     title: 'Distinct types of neural reorganization during long-term learning'
-    journal: 'J Neurophysiol in press'
+    journal: 'Journal of Neurophysiology'
     year: 2019
     paper_url: 'https://www.physiology.org/doi/abs/10.1152/jn.00466.2018'
     code_url: ''
     press_url: ''
+    
 2018:
   -
-    authors: 'Jeon BB, Swain AD, Good JT, Chase SM, Kuhlman SJ'
+    authors: 'BB Jeon, AD Swain, JT Good, SM Chase, SJ Kuhlman'
     title: 'Feature selectivity is stable in primary visual cortex across a range of spatial frequencies'
     journal: 'Sci Rep 8:15288'
     year: 2018
@@ -141,7 +199,7 @@
     code_url: ''
     press_url: ''
   -
-    authors: 'Hennig JA, Golub MD, Lund PJ, Sadtler PT, Oby ER, Quick KM, Ryu SI, Tyler-Kabara EC, *Batista AP, *Yu BM, *Chase SM'
+    authors: 'JA Hennig, MD Golub, PJ Lund, PT Sadtler, ... AP Batista*, BM Yu*, SM Chase*'
     title: 'Constraints on neural redundancy'
     journal: 'eLife 7:e36774'
     year: 2018
@@ -149,7 +207,7 @@
     code_url: 'https://github.com/mobeets/neural-redundancy-elife2018'
     press_url: ''
   -
-    authors: 'Golub MD, Sadtler PT, Oby ER, Quick KM, Ryu SI, Tyler-Kabara EC, Batista AP, *Chase SM, and *Yu BM'
+    authors: 'MD Golub, PT Sadtler, ER Oby, KM Quick, ... AP Batista, SM Chase*, and BM Yu*'
     title: 'Learning by neural reassociation'
     journal: 'Nature Neurosci.  21:607-616'
     year: 2018
@@ -157,11 +215,11 @@
     code_url: ''
     press_url: ''
   -
-    authors: 'Zhang Y and Chase SM'
-    title: 'Optimizing the usability of brain computer interfaces'
-    journal: 'Neural Comp 22:1-36'
+    authors: 'SB Suway, J Orellana, AJC McMorland, GW Fraser, ... SM Chase, RE Kass, AB Schwartz'
+    title: 'Temporally segmented directionality in the motor cortex'
+    journal: 'Cerebral Cortex'
     year: 2018
-    paper_url: 'https://www.ncbi.nlm.nih.gov/pubmed/29566348'
+    paper_url: 'https://academic.oup.com/cercor/article/28/7/2326/3862195'
     code_url: ''
     press_url: ''
   -
@@ -172,6 +230,14 @@
     paper_url: 'https://www.ncbi.nlm.nih.gov/pubmed/29553484'
     code_url: ''
     press_url: ''
+  -
+    authors: 'Y Zhang, SM Chase'
+    title: 'Optimizing the usability of brain computer interfaces'
+    journal: 'Neural Computation'
+    year: 2018
+    paper_url: 'https://www.ncbi.nlm.nih.gov/pubmed/29566348'
+    code_url: ''
+    press_url: ''
 2017:
   -
     authors: 'Bittner SR, Williamson RC, Snyder AC, Litwin-Kumar A, Doiron B, *Chase SM, *Smith MA, and *Yu BM'
@@ -179,14 +245,6 @@
     journal: 'PLoS One 12(8): e0181773'
     year: 2017
     paper_url: 'http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0181773'
-    code_url: ''
-    press_url: ''
-  -
-    authors: 'Suway SB, Orellana J, McMorland AJC, Fraser GW, Liu Z, Velliste M, Chase SM, Kass RE, and Schwartz AB'
-    title: 'Temporally segmented directionality in the motor cortex'
-    journal: 'Cereb Cortex 2017 1-14. doi: 10.1093/cercor/bhx133'
-    year: 2017
-    paper_url: 'http://academic.oup.com/cercor/article/doi/10.1093/cercor/bhx133/3862195/Temporally-Segmented-Directionality-in-the-Motor?guestAccessKey=5b2a8dfb-99e2-4e51-bde5-7304d0e67bec'
     code_url: ''
     press_url: ''
   -
