@@ -9,7 +9,7 @@ show_title: true
 	{% for item in site.data.courses %}
 	  <div class="course-item">
 	    <h2>{{ item.name }} ({{ item.units }})</h2>
-	    {{ item.description }}
+	    {{ item.description | markdownify }}
 	  </div><hr>
 	{% endfor %}
 </div>

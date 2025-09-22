@@ -1,0 +1,560 @@
+<!--
+File: LDATwoDim.htm
+Author: Brandon White
+Completion Date: September 19, 2013
+Purpose: This is an interactive two-dimensional LDA model for the probable response of two neurons to a stimulus.
+Requirements: This script requires a web broswer with HTML5 support for canvas and range input. 
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>LDATwoDim</title>
+</head>
+<body>
+
+<!--The styling options below arrange the graphs and controls side by side.-->
+<style type="text/css">
+			 .fieldset-width{float: left; height: 100%;}
+			 .graph-width{float: left; height: 600px;}
+			 .restore-align{clear: both;}
+			 .data-width{display: inline-block;}
+			 .position1{position:relative; left: 0; top:0;}
+			 .position2{display: inline-block;}
+			 .position3{white-space: nowrap;}
+			 .position4{display: inline-block; vertical-align: top;}
+</style>
+
+<div class = "position3">
+		  <!--This canvas displays the 2D LDA graph.-->
+      <canvas id="graphics" class = "position4" width="600" height="600" style="border:1px solid #000000;">
+      Your browser does not support HTML Canvas.
+      </canvas>
+
+			<!--This canvas displays the line equation and covariance matrix.-->
+      <fieldset class = "position4">
+      <legend>Graph Equations</legend>
+      <canvas id="equations" width = "350" height = "560" style="border:1px solid #000000;">
+      Your browser does not support HTML5 Canvas.
+      </canvas>
+      </fieldset>
+</div>
+
+<div class = "position3">
+			<fieldset class = "position4">
+			<legend>Parameter Controls</legend>
+			<form name="graphinput" id="graphinput">
+			<div class = "position4">
+			
+			<!--These are the controls for the graphs.-->
+			Adjust &#956;<sup></sup><sub>x, Red</sub>: </br>-10<input type="range" name="changemean2a" min="-10" max="10" step="0.2" value="-10" style="width: 200" onchange="updateMean2a(this.value)">10</br>
+			<input type="text" name="mean2a" min="-10" max="10" size="40" value="-10" onchange="updateChangeMean2a(this.value)"></br></br>
+			Adjust &#956;<sub>y, Red</sub>: </br>-10<input type="range" name="changemean2b" min="-10" max="10" step="0.2" value="10" style="width: 200" onchange="updateMean2b(this.value)">10</br>
+		  <input type="text" name="mean2b" size="40" value="10" onchange="updateChangeMean2b(this.value)"></br></br>
+			Adjust &#956;<sub>x, Blue</sub>: </br>-10<input type="range" name="changemean1a" min="-10" max="10" step="0.2" value="10" style="width: 200" onchange="updateMean1a(this.value)">10</br>
+			<input type="text" name="mean1a" size="40" value="10" onchange="updateChangeMean1a(this.value)"></br></br>
+			Adjust &#956;<sub>y, Blue</sub>: </br>-10<input type="range" name="changemean1b" min="-10" max="10" step="0.2" value="-10" style="width: 200" onchange="updateMean1b(this.value)">10</br>
+			<input type="text" name="mean1b" size="40" value="-10" onchange="updateChangeMean1b(this.value)">
+			</div>
+			
+			<div class = "position4">
+			Adjust &#963;<sup>2</sup><sub>x</sub>: </br>&nbsp;&nbsp;&nbsp;0<input type="range" name="changeauto1" min="0" max="10" step="0.1" value="10" style="width: 200" onchange="updateAuto1(this.value)">10</br>
+			<input type="text" name="auto1" size="40" value="10" onchange="updateChangeAuto1(this.value)"></br></br>
+			Adjust &#963;<sup>2</sup><sub>y</sub>: </br>&nbsp;&nbsp;&nbsp;0<input type="range" name="changeauto2" min="0" max="10" step="0.1" value="10" style="width: 200" onchange="updateAuto2(this.value)">10</br>
+			<input type="text" name="auto2" size="40" value="10" onchange="updateChangeAuto2(this.value)"></br></br>
+			Adjust &#961;: </br>&nbsp;-1<input type="range" name="changecovar" min="-1" max="1" step="0.02" value="0" style="width: 200" onchange="updateCovar(this.value)">1</br>
+			<input type="text" name="covar" size="40" value="0" onchange="updateChangeCovar(this.value)"></br></br>
+			Adjust &#960;<sub>Red</sub>: </br>&nbsp;&nbsp;&nbsp;0<input type="range" name="changepriorprob" min="0" max="1" step="0.01" value="0.5" style="width: 200" onchange="updatePriorProb(this.value)">1</br>
+			<input type="text" name="priorprob" size="40" value="0.5" onchange="updateChangePriorProb(this.value)">
+			</div>
+      </form>
+			</fieldset>	
+
+			<!--This is the reset button and the displays for some of the calculated values.-->
+      <fieldset class = "position4">
+      <legend>Reset</legend>
+      <input type="button" name="reset" value="Reset Graphs"  onclick="resetGraph()"></br>
+      <p id="B">b = 0.0000</p>
+      <p id="W1">w<sub>1</sub> = 0.00000</p>
+      <p id="W2">w<sub>2</sub> = 0.00000</p>
+      </fieldset>
+			<!--The suppressed code is part of an alternative styling setup.-->
+      <!--p class="restore-align"></p></br-->
+
+</div>
+
+
+
+<script>
+				var B, w1, w2;
+				var grid;
+				
+//The variables below store the parameters for the circles.
+var xcenter, ycenter, x2center, y2center; 
+var sigma1, sigma2, sigma1s, sigma2s, sigma1b, sigma2b;
+var skew, covar;
+
+//The variables below handle the Canvas objects. 				
+var graph=document.getElementById("graphics");
+var context=graph.getContext("2d");
+var graph2=document.getElementById("equations");
+var context2=graph2.getContext("2d");
+				
+drawAxes();
+updateConstants();
+updateEquations(); 
+updateGraph();
+				
+//The function below draws the graph axes.
+function drawAxes()
+{
+			context.font="12px";
+			for(var i = 0; i<=30; i+=5)
+			{
+			    context.fillText(i-15,38+((i/30)*500),557);
+					context.fillText(i-15,16,544-((i/30)*500));		    
+			}
+			
+			//The suppressed code sets the positions of subscripts for alternative nomenclature.
+			//context.fillText("1",295,35);
+			//context.fillText("2",560,295);
+			context.font="16px";			
+			context.fillText("x",288,30);
+			context.fillText("y",550,290);
+}
+
+//The function below draws the graph based on the user input.				
+function updateGraph()
+{
+      xcenter = (((Number(document.graphinput.mean1a.value) + 15)/30)*500)+40;
+			ycenter = 540-(((Number(document.graphinput.mean1b.value) + 15)/30)*500);
+						
+			x2center = (((Number(document.graphinput.mean2a.value) + 15)/30)*500)+40;
+			y2center = 540-(((Number(document.graphinput.mean2b.value) + 15)/30)*500);
+						
+			sigma1 = (Math.sqrt(Number(document.graphinput.auto1.value))/30)*500;
+			sigma2 = (Math.sqrt(Number(document.graphinput.auto2.value))/30)*500;
+			sigma1b = (Math.sqrt(0.25 * Number(document.graphinput.auto1.value))/30)*500;
+			sigma2b = (Math.sqrt(0.25 * Number(document.graphinput.auto2.value))/30)*500;
+			sigma1s = (Math.sqrt(2 * Number(document.graphinput.auto1.value))/30)*500;
+			sigma2s = (Math.sqrt(2 * Number(document.graphinput.auto2.value))/30)*500;
+						
+			skew = (covar/10)*(Math.PI/4);
+
+			context.clearRect(40,40,500,500);
+			context.rect(40,40,500,500);
+												
+			//The code below draws the dashed gridlines.			
+			for(var i=0; i<=500; i+=10)
+			{
+			      for(var j=0; j<=500; j+= 83.333)
+						{ 
+						      context.moveTo(35+i,j+40);
+									context.lineTo(40+i,j+40);
+																			
+									context.moveTo(40+j,i+40);
+								  context.lineTo(40+j,i+45);
+						}
+			}
+				
+			context.stroke();
+				    						
+			drawEllipse(xcenter, ycenter, sigma1s, sigma2s, skew, "#000099");
+			drawEllipse(xcenter, ycenter, sigma1, sigma2, skew, "#0000FF");
+			drawEllipse(xcenter, ycenter, sigma1b, sigma2b, skew, "#0099FF");
+						
+			drawEllipse(x2center, y2center, sigma1s, sigma2s, skew, "#660000");
+			drawEllipse(x2center, y2center, sigma1, sigma2, skew, "#CC0000");
+			drawEllipse(x2center, y2center, sigma1b, sigma2b, skew, "#FF0000");
+						
+			drawLine();
+}
+	
+
+//The function below draws the line onto the graph.			
+function drawLine()
+{
+			context.save();
+			context.rect(40,40,500,500);
+			context.clip();
+			context.lineWidth=2;
+			
+	    y1 = 540 - ((((B/w2) - (-15)*(w1/w2))+15)/30)*500;
+			y2 = 540 - ((((B/w2) - 15*(w1/w2))+15)/30)*500;
+			
+			context.moveTo(40,y1);
+			context.lineTo(540,y2);
+			context.stroke();
+			context.restore();
+			context.beginPath();
+}
+
+//The function below draws the circles.				
+function drawEllipse(x, y, width, height, skew, color)
+{			  				      
+      context.fillStyle=color;
+			context.beginPath();
+			for(var i=0; i<=(Math.PI*2); i+=((Math.PI*2)/360))
+			{
+			      context.arc(x + width*Math.cos(i)*Math.cos(skew) - height*Math.sin(i)*Math.sin(skew),
+									y + height*Math.sin(i)*Math.cos(skew) - width*Math.cos(i)*Math.sin(skew), 1, 0, 2*Math.PI);
+			      context.closePath();
+			}
+			context.fill();
+			context.beginPath();
+}
+
+//The function below calculates w1, w2, and b from the user input.
+function updateConstants()
+{
+      var output, diff1, diff2, sum1, sum2, det, a, bc, d, norm, w1temp, w2temp, b1temp, b2temp, btemp;
+			
+			covar = (document.graphinput.covar.value * Math.sqrt(document.graphinput.auto1.value) * Math.sqrt(document.graphinput.auto2.value))*10000000000/10000000000;
+			
+			diff1 = Number(document.graphinput.mean2a.value) - Number(document.graphinput.mean1a.value);
+			diff2 = Number(document.graphinput.mean2b.value) - Number(document.graphinput.mean1b.value);
+ 			sum1 = Number(document.graphinput.mean2a.value) + Number(document.graphinput.mean1a.value);
+			sum2 = Number(document.graphinput.mean2b.value) + Number(document.graphinput.mean1b.value);
+			det = 1/((Number(document.graphinput.auto1.value)*Number(document.graphinput.auto2.value))-(covar*covar));
+			a = Number(document.graphinput.auto2.value)*det;
+			d = Number(document.graphinput.auto1.value)*det;
+			bc = -1*covar*det;
+			w1temp = diff1 * a + diff2 * bc;
+			w2temp = diff1 * bc + diff2 * d;
+			norm = Math.sqrt(Math.pow(w1temp,2) + Math.pow(w2temp,2));
+			w1 = w1temp/norm;
+			w2 = w2temp/norm;
+							
+			b1temp = sum1 * a + sum2 * bc;
+			b2temp = sum1 * bc + sum2 * d;
+			btemp = 0.5 * (b1temp*diff1 + b2temp*diff2) + Math.log((1 - Number(document.graphinput.priorprob.value))/Number(document.graphinput.priorprob.value));
+			B = btemp/norm;
+			
+			updateEquations();				
+			output = "w" + "1".sub() + " = " + w1.toFixed(5);
+			document.getElementById("W1").innerHTML=output;
+			output = "w" + "2".sub() + " = " + w2.toFixed(5);
+			document.getElementById("W2").innerHTML=output;
+			output = "b = " + B.toFixed(4);
+			document.getElementById("B").innerHTML=output;
+}
+
+//The function below updates the display of the equations.
+function updateEquations()
+{
+      Xorigin = 20;
+			Yorigin = 20;
+			Yorigin2 = 120;
+			Yorigin3 = 260;
+			
+			context2.clearRect(0,0,350,560);
+			context2.font="16px";
+			context2.fillStyle="#000000";
+			context2.lineWidth="2";
+			
+			context2.moveTo(0,100);
+			context2.lineTo(350,100);
+			context2.moveTo(0,220);
+			context2.lineTo(350,220);
+			
+			//The suppressed command are the subscript positions for alternative nomenclature.
+			//Equation description.
+			context2.fillText("Line Equation: ",Xorigin,Yorigin + 10);
+			context2.fillText("y",Xorigin + 100,Yorigin + 10);
+			//context2.fillText("2",Xorigin + 110,Yorigin + 15);
+			context2.fillText("=",Xorigin + 120,Yorigin + 10);
+			context2.fillText("w",Xorigin + 135,Yorigin - 2);
+			context2.fillText("1",Xorigin + 145,Yorigin + 4);
+			context2.fillText("w",Xorigin + 135,Yorigin + 20);
+			context2.fillText("2",Xorigin + 145,Yorigin + 25);
+			context2.fillText("x",Xorigin + 155,Yorigin + 10);
+			//context2.fillText("1",Xorigin + 165,Yorigin + 15);
+			context2.fillText("+",Xorigin + 175,Yorigin + 10);
+			context2.fillText("b",Xorigin + 190,Yorigin - 2);
+			context2.fillText("w",Xorigin + 190,Yorigin + 20);
+			context2.fillText("2",Xorigin + 200,Yorigin + 25);
+			context2.moveTo(Xorigin + 130,Yorigin + 7);
+			context2.lineTo(Xorigin + 150,Yorigin + 7);
+			context2.moveTo(Xorigin + 185,Yorigin + 7);
+			context2.lineTo(Xorigin + 205,Yorigin + 7);
+			
+			//Equation with changing variables
+			context2.fillText("y",Xorigin,Yorigin + 50);
+			//context2.fillText("2",Xorigin + 10,Yorigin + 55);
+			context2.fillText("=",Xorigin + 20,Yorigin + 50);
+			context2.fillText(w1.toFixed(4),Xorigin + 35,Yorigin + 44);
+			context2.fillText(w2.toFixed(4),Xorigin + 35,Yorigin + 62);
+			context2.fillText("x",Xorigin + 90,Yorigin + 50);
+			//context2.fillText("1",Xorigin + 100,Yorigin + 55);
+			context2.fillText("+",Xorigin + 110,Yorigin + 50);
+			context2.fillText(B.toFixed(4),Xorigin + 125,Yorigin + 44);
+			context2.fillText(w2.toFixed(4),Xorigin + 125,Yorigin + 62);
+			context2.moveTo(Xorigin + 30,Yorigin + 47);
+			context2.lineTo(Xorigin + 85,Yorigin + 47);
+			context2.moveTo(Xorigin + 120,Yorigin + 47);
+			context2.lineTo(Xorigin + 175,Yorigin + 47);
+			
+			//Covariance matrix description.
+			context2.fillText("Covariance Matrix: ",Xorigin,Yorigin2 + 10);
+			context2.fillText("\u03C3",Xorigin + 145,Yorigin2 + 5);
+			context2.fillText("2",Xorigin + 160,Yorigin2);
+			context2.fillText("x",Xorigin + 160,Yorigin2 + 10);
+			context2.fillText("\u03C1",Xorigin + 235,Yorigin2 + 5);
+			context2.fillText("\u03C3",Xorigin + 245,Yorigin2 + 5);
+			context2.fillText("\u03C3",Xorigin + 268,Yorigin2 + 5);
+			//context2.fillText("2",Xorigin + 260,Yorigin2);
+			context2.fillText("x",Xorigin + 260,Yorigin2 + 10);
+			//context2.fillText("2",Xorigin + 284,Yorigin2);
+			context2.fillText("y",Xorigin + 284,Yorigin2 + 10);
+			context2.fillText("\u03C1",Xorigin + 145,Yorigin2 + 25);
+			context2.fillText("\u03C3",Xorigin + 155,Yorigin2 + 25);
+			context2.fillText("\u03C3",Xorigin + 175,Yorigin2 + 25);
+			context2.fillText("x",Xorigin + 168,Yorigin2 + 30);
+			//context2.fillText("2",Xorigin + 168,Yorigin2 + 20);
+			context2.fillText("y",Xorigin + 190,Yorigin2 + 30);
+			//context2.fillText("2",Xorigin + 190,Yorigin2 + 20)
+			context2.fillText("\u03C3",Xorigin + 235,Yorigin2 + 25);
+			context2.fillText("2",Xorigin + 250,Yorigin2 + 20);
+			context2.fillText("y",Xorigin + 250,Yorigin2 + 30);
+			context2.moveTo(Xorigin + 150,Yorigin2 - 15);
+			context2.lineTo(Xorigin + 140,Yorigin2 - 15);
+			context2.lineTo(Xorigin + 140,Yorigin2 + 30);
+			context2.lineTo(Xorigin + 150,Yorigin2 + 30);
+			context2.moveTo(Xorigin + 287,Yorigin2 - 15);
+			context2.lineTo(Xorigin + 297,Yorigin2 - 15);
+			context2.lineTo(Xorigin + 297,Yorigin2 + 30);
+			context2.lineTo(Xorigin + 287,Yorigin2 + 30);
+			
+			//Covariance matrix with changing variables.
+			context2.fillText("\u03A3",Xorigin,Yorigin2 + 70);
+			context2.fillText("=",Xorigin + 20,Yorigin2 + 70);
+			context2.moveTo(Xorigin + 50,Yorigin2 + 40);
+			context2.lineTo(Xorigin + 40,Yorigin2 + 40);
+			context2.lineTo(Xorigin + 40,Yorigin2 + 90);
+			context2.lineTo(Xorigin + 50,Yorigin2 + 90);
+			context2.moveTo(Xorigin + 170,Yorigin2 + 40);
+			context2.lineTo(Xorigin + 177,Yorigin2 + 40);
+			context2.lineTo(Xorigin + 177,Yorigin2 + 90);
+			context2.lineTo(Xorigin + 170,Yorigin2 + 90);
+			context2.fillText(Number(document.graphinput.auto1.value).toFixed(1),Xorigin + 60,Yorigin2 + 60);
+			context2.fillText(covar.toFixed(1),Xorigin + 130,Yorigin2 + 60);
+			context2.fillText(covar.toFixed(1),Xorigin + 60,Yorigin2 + 80);
+			context2.fillText(Number(document.graphinput.auto2.value).toFixed(1),Xorigin + 130,Yorigin2 + 80);
+			
+			//The suppressed code can be used to display the differences in the means before normalizing.
+			//Difference matrix.
+			/*context2.fillText("W = ",Xorigin, Yorigin3 + 15);
+			context2.moveTo(Xorigin + 50,Yorigin3 - 15);
+			context2.lineTo(Xorigin + 40,Yorigin3 - 15);
+			context2.lineTo(Xorigin + 40,Yorigin3 + 45);
+			context2.lineTo(Xorigin + 50,Yorigin3 + 45);
+			context2.moveTo(Xorigin + 170,Yorigin3 - 15);
+			context2.lineTo(Xorigin + 177,Yorigin3 - 15);
+			context2.lineTo(Xorigin + 177,Yorigin3 + 45);
+			context2.lineTo(Xorigin + 170,Yorigin3 + 45);
+			context2.fillText("\u03BC",Xorigin + 45,Yorigin3 + 5);
+			context2.fillText("x, Red",Xorigin + 60,Yorigin3 + 10);
+			context2.fillText("-\u03BC",Xorigin + 105,Yorigin3 + 5);
+			context2.fillText("x, Blue",Xorigin + 130,Yorigin3 + 10);
+			context2.fillText("\u03BC",Xorigin + 45,Yorigin3 + 35);
+			context2.fillText("y, Red",Xorigin + 60,Yorigin3 + 40);
+			context2.fillText("-\u03BC",Xorigin + 105,Yorigin3 + 35);
+			context2.fillText("y, Blue",Xorigin + 130,Yorigin3 + 40);			
+			
+			//Difference matrix with changing variables.
+			context2.fillText("W = ",Xorigin, Yorigin3 + 100);
+			context2.moveTo(Xorigin + 50,Yorigin3 + 70);
+			context2.lineTo(Xorigin + 40,Yorigin3 + 70);
+			context2.lineTo(Xorigin + 40,Yorigin3 + 130);
+			context2.lineTo(Xorigin + 50,Yorigin3 + 130);
+			context2.moveTo(Xorigin + 170,Yorigin3 + 70);
+			context2.lineTo(Xorigin + 177,Yorigin3 + 70);
+			context2.lineTo(Xorigin + 177,Yorigin3 + 130);
+			context2.lineTo(Xorigin + 170,Yorigin3 + 130);
+			context2.fillText((Number(document.graphinput.mean2a.value)-Number(document.graphinput.mean1a.value)).toFixed(2),Xorigin + 90, Yorigin3 + 90);
+			context2.fillText((Number(document.graphinput.mean2b.value)-Number(document.graphinput.mean1b.value)).toFixed(2),Xorigin + 90, Yorigin3 + 120);*/
+			
+			context2.stroke();
+			context2.beginPath();
+}
+				
+//The function below resets all the user input and updates the graph.				
+function resetGraph()
+{
+      document.graphinput.mean1a.value = 10;
+			document.graphinput.changemean1a.value = 10;
+			document.graphinput.mean1b.value = -10;
+			document.graphinput.changemean1b.value = -10;
+			document.graphinput.mean2a.value = -10;
+			document.graphinput.changemean2a.value = -10;
+			document.graphinput.mean2b.value = 10;
+			document.graphinput.changemean2b.value = 10;
+			document.graphinput.auto1.value = 10;
+			document.graphinput.changeauto1.value = 10;
+			document.graphinput.auto2.value = 10;
+			document.graphinput.changeauto2.value = 10;
+			document.graphinput.covar.value = 0;
+			document.graphinput.changecovar.value = 0;
+			document.graphinput.priorprob.value = 0.5;
+			document.graphinput.changepriorprob.value = 0.5;
+			updateConstants();
+			updateGraph();
+}
+			
+//The 16 functions below update the text input to match the sliders.
+//They also prevent silly input for the text boxes.	
+function updateMean1a(x)
+{
+      document.graphinput.mean1a.value = x;
+			updateConstants();
+			updateGraph(); 
+}
+
+function updateChangeMean1a(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean1a.value = document.graphinput.changemean1a.value;
+						x = document.graphinput.changemean1a.value;
+			}
+			document.graphinput.changemean1a.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateMean1b(x)
+{
+			document.graphinput.mean1b.value = x;
+			updateConstants(); 
+			updateGraph();
+}
+
+function updateChangeMean1b(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean1b.value = document.graphinput.changemean1b.value;
+						x = document.graphinput.changemean1b.value;
+			}
+			document.graphinput.changemean1b.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateMean2a(x)
+{
+			document.graphinput.mean2a.value = x;
+			updateConstants();
+			updateGraph(); 
+}
+	
+function updateChangeMean2a(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean2a.value = document.graphinput.changemean2a.value;
+						x = document.graphinput.changemean2a.value;
+			}
+			document.graphinput.changemean2a.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateMean2b(x)
+{
+	    document.graphinput.mean2b.value = x;
+			updateConstants();
+			updateGraph();
+}
+
+function updateChangeMean2b(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean2b.value = document.graphinput.changemean2b.value;
+						x = document.graphinput.changemean2b.value;
+			}
+			document.graphinput.changemean2b.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateAuto1(x)
+{
+			document.graphinput.auto1.value = x;
+			updateConstants();
+			updateGraph();
+}
+
+function updateChangeAuto1(x)
+{
+	    if(isNaN(x) || x < 0 || x > 10) 
+			{
+			      document.graphinput.auto1.value = document.graphinput.changeauto1.value;
+						x = document.graphinput.changeauto1.value;
+			}
+			document.graphinput.changeauto1.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateAuto2(x)
+{
+			document.graphinput.auto2.value = x;
+			updateConstants();
+			updateGraph();
+}
+
+function updateChangeAuto2(x)
+{
+	    if(isNaN(x) || x < 0 || x > 10) 
+			{
+			      document.graphinput.auto2.value = document.graphinput.changeauto2.value;
+						x = document.graphinput.changeauto2.value;
+			}
+			document.graphinput.changeauto2.value = x;
+			updateConstants();
+			updateGraph();
+}
+				
+function updateCovar(x)
+{
+			document.graphinput.covar.value = x;
+			updateConstants();
+			updateGraph();
+}
+
+function updateChangeCovar(x)
+{
+	    if(isNaN(x) || x < -1 || x > 1) 
+			{
+			      document.graphinput.covar.value = document.graphinput.changecovar.value;
+						x = document.graphinput.changecovar.value;
+			}
+			document.graphinput.changecovar.value = x;
+			updateConstants();
+			updateGraph();
+}	
+				
+function updatePriorProb(x)
+{
+			document.graphinput.priorprob.value = x;
+			updateConstants(); 
+			updateGraph();
+}
+
+function updateChangePriorProb(x)
+{
+	    if(isNaN(x) || x < 0 || x > 1) 
+			{
+			      document.graphinput.priorprob.value = document.graphinput.changepriorprob.value;
+						x = document.graphinput.changepriorprob.value;
+			}
+			document.graphinput.changepriorprob.value = x;
+			updateConstants();
+			updateGraph();
+}	
+</script>
+</body>
+</html>

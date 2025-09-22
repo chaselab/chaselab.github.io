@@ -1,0 +1,564 @@
+<!--
+File: ROC.htm
+Author: Brandon White
+Completion Date: September 19, 2013
+Purpose: This is an interactive demonstration of the accuracy of a decoder.
+Requirements: This script requires a web broswer with HTML5 support for canvas and range input. 
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+<title>ROC</title>
+</head>
+
+<body>
+
+<!--The style information below arranges the graphs side by side.-->
+<style type="text/css">
+			 .fieldset-width{float: left; height: 100%;}
+			 .position1{white-space: nowrap;}
+			 .position2{display: inline-block; vertical-align: top;}
+			 .clearfloat{clear: both;}
+</style>
+
+<!--This canvas displays the normal distributions.-->
+<div class = "position1">
+<canvas id="graph1" class = "position2" width="600" height="600" style="border:1px solid #000000;">
+Your browser does not support HTML5 Canvas.
+</canvas>
+
+<!--This canvas displays the accuracy graph.-->
+<canvas id="graph2" class = "position2" width="600" height="600" style="border:1px solid #000000;">
+Your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+
+<div class = "position1">
+<fieldset class = "position2">
+<legend>Parameter Controls</legend>
+
+<!--These are the controls for the graphs.-->
+<form name="graphinput" id="graphinput">
+			<div class = "position2">
+			Adjust &#956;<sub>Blue</sub>: </br>-10<input type="range" name="changemeanN" min="-10" max="10" step="0.2" value="-10" width="200" onchange="updateMeanN(this.value)">10</br>
+			<input type="text" name="meanN" size="40" value="-10" onchange="updateChangeMeanN(this.value)"></br></br>
+			Adjust &#963;<sup>2</sup><sub>Blue</sub>: </br>&nbsp;&nbsp;&nbsp;1<input type="range" name="changevarianceN" min="1" max="10" step="0.1" value="10" width="200" onchange="updateVarianceN(this.value)">10</br>
+			<input type="text" name="varianceN" size="40" value="10" onchange="updateChangeVarianceN(this.value)"></br></br>
+			Threshold: </br>-40<input type="range" name="changeaccuracy" min="-40" max="40" step="0.1" value="0" width="200" onchange="updateAccuracy(this.value)">40</br>
+			<input type="text" name="accuracy" size="40" value="0" onchange="updateChangeAccuracy(this.value)">
+			</div>
+			
+			<div class = "position2">
+			Adjust &#956;<sub>Red</sub>: </br>-10<input type="range" name="changemeanS" min="-10" max="10" step="0.2" value="10" width="200" onchange="updateMeanS(this.value)">10</br>
+			<input type="text" name="meanS" size="40" value="10" onchange="updateChangeMeanS(this.value)"></br></br>
+			Adjust &#963;<sup>2</sup><sub>Red</sub>: </br>&nbsp;&nbsp;&nbsp;1<input type="range" name="changevarianceS" min="1" max="10" step="0.1" value="10" width="200" onchange="updateVarianceS(this.value)">10</br>
+			<input type="text" name="varianceS" size="40" value="10" onchange="updateChangeVarianceS(this.value)">
+			</div>
+</form>
+</fieldset>
+			 <!--This is the reset button and the accuracy and area-under-curve displays.-->
+			 <fieldset class="position2">
+			 <legend>Reset</legend>
+			       <input type="button" name="reset" value="Reset Graphs" onclick="resetGraph()"></br>
+			       <p id="accuracy"></p>
+			       <p id="AUC"></p>
+			 </fieldset>
+</div>
+
+<!--The suppressed code is part of an alternative styling setup.-->
+<!--p class = "clearfloat"></p></br-->
+<p id="test"></p>
+
+<script>
+//The variables below affect the Canvases.
+var graph1=document.getElementById("graph1");
+var context1=graph1.getContext("2d");
+var graph2=document.getElementById("graph2");
+var context2=graph2.getContext("2d");
+
+var B;
+var xN = new Array();
+var yN = new Array();
+var yS = new Array();
+
+var scale;
+var AUC, accuracy, markerX, markerY;
+var mu1X = 0, mu1Y = 0, mu2X = 0, mu2Y = 0, muS1X = 0, muS1Y = 0, muS2X = 0, mus2Y = 0, intersectX = 0, intersectY = 0;
+
+drawAxes();
+updateGraph1();
+updateGraph2();
+
+
+//The function below draws the axes.
+function drawAxes()
+{
+ 			var legendOriginX = 130;
+			var legendOriginY = 590;
+			
+      context1.font="12px";
+      context2.font="12px";
+			
+			for(var i=-40; i<=40; i+=20)
+			{
+			    context1.fillText(i,56+(((i+40)/80)*500),560);
+					//context1.fillText(i.toFixed(1),16,544-((i/1)*500));
+			}
+			
+			for(var i=0; i<=1; i+=0.2)
+			{
+			    context2.fillText(i.toFixed(1),56+((i/1)*500),560);
+					context2.fillText(i.toFixed(1),36,544-((i/1)*500));
+			}
+			
+			context1.font = "16px";
+			context2.font = "16px";
+			
+			context1.fillText("x",305,575);
+			context1.rotate(-0.5*Math.PI);
+			context1.fillText("Joint Probability",-345,15);
+			context1.rotate(0.5*Math.PI);
+			
+			context1.fillStyle = "#0000FF";
+			context1.fillText("Blue = P(X, Noise)",legendOriginX,legendOriginY);
+			context1.fillStyle = "#FF0000";
+			context1.fillText("Red = P(X, Signal)",legendOriginX + 250, legendOriginY);
+			
+			context2.fillText("False Alarm Rate",legendOriginX + 110,legendOriginY);
+			context2.rotate(-0.5*Math.PI);
+			context2.fillText("Hit Rate",-315,25);
+			context2.rotate(0.5*Math.PI);
+			
+			context1.font = "12px";
+			context2.font = "12px";
+			context1.fillStyle="#000000";
+			context2.fillStyle="#000000";
+}
+
+//The function below updates the y axis based on the higest value between the two curves.
+function updateYAxis(y)
+{
+      context1.clearRect(15,0,40,580);
+			for(var i = 0; i<=5; i++)
+			{
+			     context1.fillText((i/5*y).toFixed(2),25,545 - (i*100));
+			}
+}
+
+//The function below updates the probability distribution graphs.
+function updateGraph1()
+{
+      var x, y1, y2, prev, tester = "", tester2;
+			scale = Math.max((1/(Number(document.graphinput.varianceN.value)*Math.sqrt(2*Math.PI))),(1/(Number(document.graphinput.varianceS.value)*Math.sqrt(2*Math.PI))));
+			B = 0, prev = 500/scale;
+			
+			updateYAxis(scale);
+			
+      context1.clearRect(60,40,500,500);
+			context1.rect(60,40,500,500);
+			
+			context1.save();
+			context1.rect(60,40,500,500);
+			context1.clip();
+			
+			context1.stroke();
+			
+			context1.strokeStyle="#0000FF";
+			context1.beginPath();
+			for(var i=0; i<=80; i++)
+			{
+			    x = 60+((i/80)*500);
+			    y1 = ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	       * Math.pow(Math.E,( (-1 * Math.pow(((i-40) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*(500/scale);
+				  y2 = ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						     * Math.pow(Math.E,( (-1 * Math.pow(((i-40) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*(500/scale);
+						
+					//The code below finds where the Gaussian curves intersect if desired.
+					/*if(Math.abs(y2-y1) <= prev)
+					  {
+					 		  if(x >= (40 + (((Number(document.graphinput.meanN.value) - Number(document.graphinput.varianceN.value))+40)/80)*500)
+								&& x <= (40 + (((Number(document.graphinput.meanS.value) + Number(document.graphinput.varianceS.value))+40)/80)*500))
+								{
+								   if(Number(document.graphinput.meanN.value) == Number(document.graphinput.meanS.value)
+									    && Number(document.graphinput.varianceN.value) == Number(document.graphinput.varianceS.value))
+									 {B = 40 + (Number(document.graphinput.meanN.value)+40)/80*500;}
+					       	 else
+									 {
+									       B = x;
+									       prev = Math.abs(y2-y1);
+									 }
+									 //tester += x.toFixed(2) + ": " + ((((Number(document.graphinput.meanN.value) - Number(document.graphinput.varianceN.value))+40)/80)*500).toFixed(2) + "; " + prev + "> ";
+									 
+							  }
+					  }*/
+						//Debug variable.
+						//tester += y1.toFixed(2) + " : " + y2.toFixed(2) + " : " + Math.abs(y2-y1).toFixed(2)  + " : " + x.toFixed(2) + " : "
+						//+ (40 + (((Number(document.graphinput.meanN.value) - Number(document.graphinput.varianceN.value))+40)/800)*500).toFixed(2) + "=====";
+					
+					tester2 = Math.abs(y2-y1)
+					if(x == 0){context1.moveTo(x,540-y1);}
+					else{context1.lineTo(x,540-y1);}
+					//context1.arc(x, 540 - y1, 2, 0, 2*Math.PI);
+			    //context1.closePath();
+			}
+			document.getElementById("test").innerHTML=tester;
+			context1.stroke();
+			
+			context1.strokeStyle="#FF0000";
+			context1.beginPath();
+			for(var i=0; i<=80; i++)
+			{
+			    x = 60+((i/80)*500);
+					y2 = ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						     * Math.pow(Math.E,( (-1 * Math.pow(((i-40) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*(500/scale);
+						
+					if(x == 0){context1.moveTo(x, 540 - y2);}
+					else{context1.lineTo(x, 540 - y2);}
+			}
+			context1.stroke();
+			context1.strokeStyle="#000000";
+			context1.beginPath();
+			
+			fiveLines();
+			context1.restore();
+			
+			
+}
+
+//The function below updates the Hits vs. False Alarms graph.
+function updateGraph2()
+{
+      var x, y1 = 0, y2 = 0, y1a = 0, y1b = 0, y2b = 0, tester = "";
+			markerX = 0; markerY = 0;
+			
+ 			context2.clearRect(60,40,500,500);
+			context2.rect(60,40,500,500);
+			
+			context2.save();
+			context2.rect(60,40,500,500);
+			context2.clip();
+			
+			for(var i=0; i<=500; i+=10)
+			{
+			      for(var j=0; j<=500; j+=100)
+						{
+						      context2.moveTo(55+i,j+40);
+									context2.lineTo(60+i,j+40);
+									
+									context2.moveTo(60+j,i+40);
+									context2.lineTo(60+j,i+45);
+						}
+			}
+			
+			context2.stroke();
+			
+			context2.fillStyle="#0000FF";
+			context2.beginPath();
+			for(var i=0; i<=80; i++)
+			{					
+						y1 += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	       * Math.pow(Math.E,( (-1 * Math.pow(( (i - 40) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*500;
+						
+						y2 += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						     * Math.pow(Math.E,( (-1 * Math.pow(( (i - 40) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*500;
+			      
+						yN[i] = y1;
+						yS[i] = y2;
+			}
+			
+			AUC = 0;			
+			for(var i = -100; i <= 800; i++)
+			{			
+			      y2b +=  ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI))))
+						     * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))/10;
+					  y1a +=  ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	       * Math.pow(Math.E,( (-1 * Math.pow(( (((i - 1) - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))/10;
+						y1b +=  ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	       * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))/10;
+						AUC += y2b * (y1b - y1a);//(0.1) * (1/80);
+											 
+						if(i <= (Number(document.graphinput.accuracy.value)+40)*10)
+						{
+						      markerX += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	       * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+									markerY += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						     * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;
+						}
+						
+						//The calculations below determine the locations of the circles corresponding to the 5 predetermined points if desired.
+						/*if(i <= (Number(document.graphinput.meanN.value)+40)*10)
+						{
+						      mu1X += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	             * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+						      mu1Y += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						           * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;		 
+					  }
+						
+						if(i <= (Number(document.graphinput.meanS.value)+40)*10)
+						{
+						      mu2X += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	             * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+						      mu2Y += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						           * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;		 
+					  }
+						
+						if(i <= (Number(document.graphinput.meanN.value) - Number(document.graphinput.varianceN.value) + 40)*10)
+						{
+						      muS1X += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	             * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+						      muS1Y += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						           * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;		 
+					  }
+						
+						if(i <= (Number(document.graphinput.meanS.value) + Number(document.graphinput.varianceS.value) + 40)*10)
+						{
+						      muS2X += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	             * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+						      muS2Y += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						           * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;		 
+					  }
+						
+						if(i <= (B-40)*800/500)
+						{
+						      intersectX += ((1/(Number(document.graphinput.varianceN.value)*(Math.sqrt(2*Math.PI))))
+			   	             * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanN.value)),2))/(2*Math.pow(Number(document.graphinput.varianceN.value),2)) )  ))*50;
+						      intersectY += ((1/(Number(document.graphinput.varianceS.value)*(Math.sqrt(2*Math.PI)))) //))* Math.pow(Math.E,((-1 * Math.pow(t,2))/2)))
+						           * Math.pow(Math.E,( (-1 * Math.pow(( ((i - 400)/10) - Number(document.graphinput.meanS.value)),2))/(2*Math.pow(Number(document.graphinput.varianceS.value),2)) )  ))*50;		 
+					  }*/
+			}
+			accuracy = ((markerX/500 + (1 - markerY/500))/2)*100;
+			
+			document.getElementById("AUC").innerHTML = "Area Under Curve: " + (1 - AUC).toFixed(2);
+			document.getElementById("accuracy").innerHTML = "Accuracy at Threshold: " + accuracy.toFixed(2) + "%";
+
+			context2.beginPath();
+			
+			context2.strokeStyle="#0000FF";
+			context2.beginPath();
+			context2.moveTo(560 - yN[0], 40 + yS[0]);
+			for(var i=1; i<=80; i++)
+			{
+			      context2.lineTo(560 - yN[i], 40 + yS[i]);
+			}
+			context2.stroke();
+			context2.beginPath();
+			
+			//Debug command.
+			//document.getElementById("test").innerHTML=tester;
+			
+			context2.strokeStyle="#000000";
+			fiveCircles();
+			drawLine();
+			context2.restore();
+}
+
+//The function below draws the circles on the Hits vs. False Alarms graph.
+function fiveCircles()
+{
+      context2.arc(560 - markerX, 40 + markerY,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			
+			//The code below draws circles at the 5 predetermined points if desired.
+			/*context2.strokeStyle="#FF0000";
+			context2.arc(540 - mu1X, 40 + mu1Y,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			context2.strokeStyle="#00FFFF";
+			context2.arc(540 - mu2X, 40 + mu2Y,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			context2.strokeStyle="#00FF00";
+			context2.arc(540 - intersectX, 40 + intersectY,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			context2.strokeStyle="#0000FF";
+			context2.arc(540 - muS1X, 40 + muS1Y,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			context2.strokeStyle="#000000";
+			context2.arc(540 - muS2X, 40 + muS2Y,10,0,2*Math.PI);
+			context2.stroke();
+			context2.beginPath();
+			context2.strokeStyle="#000000";*/
+}
+
+//This function draws the lines marking locations on the Hit vs. False Alarm graph.
+function fiveLines()
+{
+			context1.lineWidth=1;
+			
+			context1.moveTo(60 + (((Number(document.graphinput.accuracy.value)+40)/80)*500),40);
+			context1.lineTo(60 + (((Number(document.graphinput.accuracy.value)+40)/80)*500),540);
+			context1.stroke();
+			context1.beginPath();
+			
+			//The code below places lines at 5 predetermined locations if desired.
+ 			/*context1.strokeStyle="#00FF00";
+			context1.moveTo(B,40);
+			context1.lineTo(B,540);
+			context1.stroke();
+			context1.beginPath();
+
+      context1.strokeStyle="#FF0000";
+			context1.moveTo(40+(((Number(document.graphinput.meanN.value)+40)/80)*500),40);
+			context1.lineTo(40+(((Number(document.graphinput.meanN.value)+40)/80)*500),540);
+			context1.stroke();
+			context1.beginPath();
+			
+			context1.strokeStyle="#00FFFF";
+			context1.moveTo(40+(((Number(document.graphinput.meanS.value)+40)/80)*500),40);
+			context1.lineTo(40+(((Number(document.graphinput.meanS.value)+40)/80)*500),540);
+			context1.stroke();
+			context1.beginPath();
+			
+			context1.strokeStyle="#0000FF";
+			context1.moveTo(40+(((Number(document.graphinput.meanN.value)-Number(document.graphinput.varianceN.value)+40)/80)*500),40);
+			context1.lineTo(40+(((Number(document.graphinput.meanN.value)-Number(document.graphinput.varianceN.value)+40)/80)*500),540);
+			context1.stroke();
+			context1.beginPath();
+			
+			context1.strokeStyle="#000000";
+			context1.moveTo(40+(((Number(document.graphinput.meanS.value)+Number(document.graphinput.varianceS.value)+40)/80)*500),40);
+			context1.lineTo(40+(((Number(document.graphinput.meanS.value)+Number(document.graphinput.varianceS.value)+40)/80)*500),540);
+			context1.stroke();
+			context1.beginPath();*/
+			
+			//context1.stroke();
+			//context1.beginPath();
+			//context1.strokeStyle="#000000";
+}
+
+//The function below draws the diagonal line on the Hits vs. False Alarms graph.
+function drawLine()
+{
+      context2.save();
+			context2.rect(60,40,500,500);
+			context2.clip();
+			context2.lineWidth=2;
+			context2.moveTo(60,540);
+			context2.lineTo(560,40);
+			context2.stroke();
+			context2.restore();
+			context2.beginPath();
+}
+
+//The function below resets the input.
+function resetGraph()
+{
+      document.graphinput.meanN.value = -10;
+			document.graphinput.changemeanN.value = -10;
+			document.graphinput.varianceN.value = 10;
+			document.graphinput.changevarianceN.value = 10;
+			document.graphinput.meanS.value = 10;
+			document.graphinput.changemeanS.value = 10;
+			document.graphinput.varianceS.value = 10;
+			document.graphinput.changevarianceS.value = 10;
+			document.graphinput.accuracy.value = 0;
+			document.graphinput.changeaccuracy.value = 0;
+			updateGraph1();
+			updateGraph2();
+}
+
+//The 8 functions below match the slider and text field values, and prevent silly input.
+function updateMeanN(x)
+{
+      document.graphinput.meanN.value=x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateChangeMeanN(x)
+{
+      if(isNaN(x) || x < -10 || x > 10)
+			{
+			      document.graphinput.meanN.value = document.graphinput.changemeanN.value;
+						x = document.graphinput.changemeanN.value;
+			}
+      document.graphinput.changemeanN.value = x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateVarianceN(x)
+{
+      document.graphinput.varianceN.value=x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateChangeVarianceN(x)
+{
+      if(isNaN(x) || x < 1 || x > 10)
+			{
+			      document.graphinput.varianceN.value = document.graphinput.changevarianceN.value;
+						x = document.graphinput.changevarianceN.value;
+			}
+      document.graphinput.changevarianceN.value = x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateMeanS(x)
+{
+      document.graphinput.meanS.value=x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateChangeMeanS(x)
+{
+      if(isNaN(x) || x < -10 || x > 10)
+			{
+			      document.graphinput.meanS.value = document.graphinput.changemeanS.value;
+						x = document.graphinput.changemeanS.value;
+			}
+      document.graphinput.changemeanS.value = x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateVarianceS(x)
+{
+      document.graphinput.varianceS.value=x;
+		  updateGraph1();
+			updateGraph2();
+}
+
+function updateChangeVarianceS(x)
+{
+      if(isNaN(x) || x < 1 || x > 10)
+			{
+			      document.graphinput.varianceS.value = document.graphinput.changevarianceS.value;
+						x = document.graphinput.changevarianceS.value;
+			}
+      document.graphinput.changevarianceS.value = x;
+			updateGraph1();
+			updateGraph2();
+}
+
+function updateAccuracy(x)
+{
+      document.graphinput.accuracy.value=x;
+		  updateGraph1();
+			updateGraph2();
+}
+
+function updateChangeAccuracy(x)
+{
+      if(isNaN(x) || x < -40 || x > 40)
+			{
+			      document.graphinput.accuracy.value = document.graphinput.changeaccuracy.value;
+						x = document.graphinput.changeaccuracy.value;
+			}
+      document.graphinput.changeaccuracy.value = x;
+			updateGraph1();
+			updateGraph2();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!--
+File: LDAOneDim.htm
+Author: Brandon White
+Completion Date: September 19, 2013
+Purpose: This is an interactive one-dimensional LDA model for the probable response of two neurons to a stimulus.
+Requirements: This script requires a web broswer with HTML5 support for canvas and range input. 
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+<title>LDAOneDim</title>
+</head>
+
+<body>
+<!--The style information below arranges the canvases side by side.-->
+<style type="text/css">
+			 .fieldset-auto-width{float: left; display: inline-block; height: 100%;}
+			 .position1{white-space: nowrap;}
+			 .position2{display: inline-block; vertical-align: top;}
+			 .clearfloat{clear: both;}
+</style>
+
+<div class="position1">
+<!--The Canvas below displays the joint  probability graph.-->
+<canvas id="graph1" class="position2" width="600" height="600" style="border:1px solid #000000;">
+Your browser does not support HTML5 Canvas.
+</canvas><!--/br></br>-->
+
+<!--The Canvas below displays the conditional probability graph.-->
+<canvas id="graph2" class="position2" width="600" height="600" style="border:1px solid #000000;">
+Your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+
+<!--The block below includes the controls for the graphs.-->
+<div class="position1">
+<fieldset class = "position2">
+<legend>Parameter Controls</legend>
+<form name="graphinput" id="graphinput">
+			<div class = "position2">
+			Adjust &#956;<sub>Blue</sub>: </br>&nbsp;&nbsp;-10<input type="range" name="changemean1" min="-10" max="10" step="0.2" value="-10" style="width: 200" onchange="updateMean1(this.value)">10</br>
+			<input type="text" name="mean1" size = "40" value="-10" onchange="updateChangeMean1(this.value)"></br></br>
+ 		  Adjust &#956;<sub>Red</sub>: </br>&nbsp;&nbsp;-10<input type="range" name="changemean2" min="-10" max="10" step="0.2" value="10" style="width: 200" onchange="updateMean2(this.value)">10</br>
+			<input type="text" name="mean2" size = "40" value="10" onchange="updateChangeMean2(this.value)"></br></br>
+			</div>
+			<div class = "position2">
+			Adjust &#963;<sup>2</sup>: </br>0.001<input type="range" name="changevariance" min="0.001" max="10" step="0.1" value="5" style="width: 200" onchange="updateVariance(this.value)">10</br>
+			<input type="text" name="variance" size = "40" value="5" onchange="updateChangeVariance(this.value)"></br></br>
+			Adjust &#960;<sub>Blue</sub>: </br>0.001<input type="range" name="changepriorprob" min="0.001" max="0.999" step="0.01" value="0.5" style="width: 200" onchange="updatePriorProb(this.value)">0.999</br>
+			<input type="text" name="priorprob" size="40" value="0.5" onchange="updateChangePriorProb(this.value)">
+      </div>
+</form>
+</fieldset>
+
+<!--The block below includes the reset button and the display for b.-->			
+<fieldset class="position2">
+<legend>Reset</legend>
+      <input type="button" name="reset" value="Reset Graphs" onclick="resetGraph()"></br>
+      <p id="B">b = 0.0000</p>
+</fieldset>
+<!--The suppressed code is part of an alternative style setup.-->
+<!--p class = "clearfloat"></p></br-->
+</div>
+
+<script>
+							
+var y, j, B;
+var tester = ""; //Debug variable.
+				
+//The variables below relate to the Canvas.				
+var graph1=document.getElementById("graph1");
+var context1=graph1.getContext("2d");
+var graph2=document.getElementById("graph2");
+var context2=graph2.getContext("2d");
+				
+updateB();
+drawAxes();
+updateGraph();
+
+//The function below draws the x axis.
+function drawAxes()
+{
+      var legendOriginX = 130;
+			var legendOriginY = 590;
+			
+			context1.font="12px";
+			context2.font="12px";
+			
+			for(var i = -40; i<=40; i+=20)
+			{
+			      context1.fillText(i,56+(((i+40)/80)*500),560);
+						context2.fillText(i,56+(((i+40)/80)*500),560);
+			}
+			context1.font="16px";
+			context2.font="16px";
+			context1.fillText("x",305,575);
+			context2.fillText("x",305,575);
+			
+			context1.rotate(-0.5*Math.PI);
+			context2.rotate(-0.5*Math.PI);
+			context1.fillText("Joint Probability",-345,15);
+			context2.fillText("Conditional Probability",-355,15);
+			context1.rotate(0.5*Math.PI);
+			context2.rotate(0.5*Math.PI);
+			
+			context1.fillStyle="#0000FF";
+			context1.fillText("Blue = P(X, Noise)",legendOriginX,legendOriginY);
+			context1.fillStyle="#FF0000";
+			context1.fillText("Red = P(X, Signal)",legendOriginX + 250,legendOriginY);
+			
+			context2.fillStyle="#0000FF";
+			context2.fillText("Blue = P(X | Noise)",legendOriginX,legendOriginY);
+			context2.fillStyle="#FF0000";
+			context2.fillText("Red = P(X | Signal)",legendOriginX + 250,legendOriginY);
+			
+			context1.fillStyle="#000000";
+			context2.fillStyle="#000000";
+			context1.font="12px";
+			context2.font="12px";
+}
+
+//The function below updates the y axis based on the maximum y value between the two curves.
+function updateYAxis(y)
+{
+      context1.clearRect(15,0,42,580);
+      for(var i = 0; i<=5; i++)
+			{
+			     context1.fillText((i/5*y).toFixed(2),25,545 - (i*100));
+			}
+			context2.clearRect(15,0,42,580);
+      for(var i = 0; i<=5; i++)
+			{
+			     context2.fillText((i/5*y).toFixed(2),25,545 - (i*100));
+			}
+}
+
+//The function below updates both graphs based on user input.				
+function updateGraph()
+{
+      var scale = 1/((Number(document.graphinput.variance.value)*Math.sqrt(2*Math.PI)));
+			updateYAxis(scale);
+					
+			context1.clearRect(60,40,500,500);
+			context1.rect(60,40,500,500);
+			context1.stroke();
+							
+			context1.save();
+			context1.rect(60,40,500,500);
+			context1.clip();
+							
+			//Draws the Noise response distribution.
+			context1.strokeStyle="#0000FF";
+			context1.beginPath();
+							
+			for(var i=-40;i<=40;i+=0.5)
+		  {
+			      j = 60 + (((i+40)/80)*500);
+      			y = 540 - (((500/scale) * (1/(Number(document.graphinput.variance.value)*Math.sqrt(2*Math.PI)))
+							  * Math.pow(Math.E,-1 * ( Math.pow((i - Number(document.graphinput.mean1.value)),2)/(2*Math.pow(Number(document.graphinput.variance.value),2)) )))
+								* Number(document.graphinput.priorprob.value));
+						if(i == -40){context1.moveTo(j,y);}
+						else{context1.lineTo(j,y);}
+			}
+			context1.stroke();
+				 			
+			//Draws the Signal response distribution.
+			context1.strokeStyle="#FF0000";
+			context1.beginPath();
+							
+			for(var i=-40;i<=40;i+=0.5)
+			{
+			      j = 60 + (((i+40)/80)*500);
+      			y = 540 - (((500/scale) * (1/(Number(document.graphinput.variance.value)*Math.sqrt(2*Math.PI)))
+							  * Math.pow(Math.E,-1 * ( Math.pow((i - Number(document.graphinput.mean2.value)),2)/(2*Math.pow(Number(document.graphinput.variance.value),2)) )))
+								* (1 - Number(document.graphinput.priorprob.value)));
+						if(i == -40){context1.moveTo(j,y);}
+						else{context1.lineTo(j,y);}
+			}
+			context1.stroke();
+			context1.beginPath();
+							
+			context1.restore();
+							
+			for(var i=45;i<=540;i+=10)
+			{
+			      j = 60 + (((B+40)/80)*500);
+						context1.moveTo(j,i);
+						context1.lineTo(j,i+5);
+			}
+			context1.stroke();
+			context1.beginPath();
+
+			context2.clearRect(60,40,500,500);
+			context2.rect(60,40,500,500);
+			context2.stroke();
+							
+			context2.save();
+			context2.rect(60,40,500,500);
+			context2.clip();
+							
+			//Draws the response given Noise distribution.
+			context2.strokeStyle="#0000FF";
+			context2.beginPath();
+							
+			for(var i=-40;i<=40;i+=0.5)
+			{
+			      j = 60 + (((i+40)/80)*500);
+      			y = 540 - ((500/scale) * (1/(Number(document.graphinput.variance.value)*Math.sqrt(2*Math.PI)))
+							  * Math.pow(Math.E,-1 * ( Math.pow((i - Number(document.graphinput.mean1.value)),2)/(2*Math.pow(Number(document.graphinput.variance.value),2)) )));
+						if(i == -40){context2.moveTo(j,y);}
+						else{context2.lineTo(j,y);}
+			}
+			context2.stroke();
+							
+			//Draws the response given Signal distribution.
+			context2.strokeStyle="#FF0000";
+			context2.beginPath();
+			for(var i=-40;i<=40;i+=0.5)
+			{
+			      j = 60 + (((i+40)/80)*500);
+      			y = 540 - ((500/scale) * (1/(Number(document.graphinput.variance.value)*Math.sqrt(2*Math.PI)))
+							  * Math.pow(Math.E,-1 * ( Math.pow((i - Number(document.graphinput.mean2.value)),2)/(2*Math.pow(Number(document.graphinput.variance.value),2)) )));
+						if(i == -40){context2.moveTo(j,y);}
+						else{context2.lineTo(j,y);}
+			}
+			context2.stroke();
+			context2.beginPath();
+						
+			context2.restore();
+									
+			for(var i=45;i<=540;i+=10)
+			{
+			      j = 60 + (((B+40)/80)*500);
+						context2.moveTo(j,i);
+						context2.lineTo(j,i+5);											
+			}
+			context2.stroke();
+			context2.beginPath();	
+}
+
+//The function below updates the b value.				
+function updateB()
+{
+			B = ((Number(document.graphinput.mean2.value) + Number(document.graphinput.mean1.value))/2)
+			      - (Math.pow(Number(document.graphinput.variance.value),2)/(Number(document.graphinput.mean2.value) - Number(document.graphinput.mean1.value)))
+				 	  * (Math.log((1-Number(document.graphinput.priorprob.value))/Number(document.graphinput.priorprob.value)));
+      document.getElementById("B").innerHTML="b = " + B.toFixed(4);
+}
+
+//The function below resets the controls.				
+function resetGraph()
+{
+      document.graphinput.mean1.value = -10;
+			document.graphinput.changemean1.value = -10;
+			document.graphinput.mean2.value =  10;
+			document.graphinput.changemean2.value =  10;
+			document.graphinput.variance.value = 5;
+			document.graphinput.changevariance.value =  5;
+			document.graphinput.priorprob.value = 0.5;
+			document.graphinput.changepriorprob.value =  0.5;
+			updateB();
+			updateGraph();
+}
+				
+//The 8 functions below match the slider values to the text boxes, and prevent silly input.
+function updateMean1(x)
+{
+      document.graphinput.mean1.value = x;
+			updateB();
+			updateGraph();
+}
+
+function updateChangeMean1(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean1.value = document.graphinput.changemean1.value;
+						x = document.graphinput.changemean1.value;
+			}
+			document.graphinput.changemean1.value = x;
+			updateB();
+			updateGraph();
+}
+				
+function updateMean2(x)
+{
+      document.graphinput.mean2.value = x;
+			updateB();
+			updateGraph();
+}
+
+function updateChangeMean2(x)
+{
+	    if(isNaN(x) || x < -10 || x > 10) 
+			{
+			      document.graphinput.mean2.value = document.graphinput.changemean2.value;
+						x = document.graphinput.changemean2.value;
+			}
+			document.graphinput.changemean2.value = x;
+			updateB();
+			updateGraph();
+}
+				
+function updateVariance(x)
+{
+      document.graphinput.variance.value = x;
+			updateB();
+			updateGraph();
+}
+
+function updateChangeVariance(x)
+{
+	    if(isNaN(x) || x < 0.001 || x > 10) 
+			{
+			      document.graphinput.variance.value = document.graphinput.changevariance.value;
+						x = document.graphinput.changevariance.value;
+			}
+			document.graphinput.changevariance.value = x;
+			updateB();
+			updateGraph();
+}
+				
+function updatePriorProb(x)
+{
+      document.graphinput.priorprob.value = x;
+			updateB();
+			updateGraph();
+}
+
+function updateChangePriorProb(x)
+{
+			if(isNaN(x) || x < 0.001 || x > 0.999) 
+			{
+			      document.graphinput.priorprob.value = document.graphinput.changepriorprob.value;
+						x = document.graphinput.changepriorprob.value;
+			}
+			document.graphinput.changepriorprob.value = x;
+			updateB();
+			updateGraph();
+}
+</script>
+</body>
+</html>
